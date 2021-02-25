@@ -15,3 +15,4 @@ public class Blob extends Enemy{
         this.tauntUser();
     };
 }
+
