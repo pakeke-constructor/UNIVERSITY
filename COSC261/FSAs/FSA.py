@@ -2,7 +2,11 @@
 
 '''
 
-FSM simulator.
+FSA simulator.
+What are FSA's?
+
+FSA's can be mathematically defined:
+
 
 
 
@@ -18,7 +22,7 @@ FSM simulator.
 '''
 
 
-class FSM:
+class FSA:
     def __init__(self, alphabet : set(), states : {str : {str : [str]}}, start_state):  
         self.states = states
         self.alphabet = alphabet
@@ -54,7 +58,7 @@ class FSM:
 
 
 def test():
-    f = FSM(
+    f = FSA(
         set(['0','1']),
         {
             'q0' : {'0':'q1', '1':'q3'},

@@ -18,6 +18,13 @@ def _gen_strings(alpha, strs, length):
     return _gen_strings(alpha, lis, length - 1)
 
 
+
+
+
+
+
+
+
 def all_strings(alpha, length):
     '''
 
