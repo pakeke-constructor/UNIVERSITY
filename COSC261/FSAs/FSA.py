@@ -4,30 +4,20 @@
 
 FSA simulator.
 What are FSA's?
-
-FSA's can be mathematically defined:
-
-
-
-
-
-
-
-
-
-
-
-
+(see DFSA.md)
 
 '''
 
+RL = lambda x: range(len(x))
+
 
 class FSA:
-    def __init__(self, alphabet : set(), states : {str : {str : [str]}}, start_state):  
+    def __init__(self, alphabet : set(), states : {str : {str : str}}, start_state, accept_states):  
         self.states = states
         self.alphabet = alphabet
         self.current_state = start_state
         self.start_state = start_state
+        self.accept_states = accept_states
         
         assert type(alphabet) == set, "alphabet gotta be a set"
 
@@ -56,28 +46,92 @@ class FSA:
     def reset(self):
         self.current_state = self.start_state
 
+    def show(self):
+        print("\n")
+        for statename, dic in self.states.items():
+            st = ''
+            for k,v in dic.items():
+                st += f'     {k} : {v}\n' 
+            print(f"{statename}  =>  \n{st}\n")
+        print()
+
+    @staticmethod
+    def gen_ar(states, accept_states):
+        ar = []
+        state_ar = []
+        length = len(states)
+        for i in range(length):
+            ar.append( [True] * length )
+        
+        state_ar = list(states.keys())
+        state_hash = dict()
+        for i,e in enumerate(state_ar):
+            state_hash[e] = i
+
+        max_ = 0
+        for x in range(len(ar)):
+            for y in range(max_):
+                if state_ar[x] in accept_states or state_ar[y] in accept_states:
+                    ar[x][y] = 0  # This pair has a final state
+                else:
+                    ar[x][y] = (state_ar[x], state_ar[y])
+            max_ += 1
+        
+        return ar, state_hash, state_ar
+
+    def check_m(self, ar, hsh, a,b):
+        '''
+        checks if a,b should be marked
+        '''
+        aar = []
+        bar = []
+
+        for alp in self.alphabet:
+            aar.append(self.states[a][alp])
+            bar.append(self.states[b][alp])
+        
+        tups = zip(aar, bar)
+
+        for q,w in tups:
+            i1 = hsh[q]
+            i2 = hsh[w]
+            if (not ar[i1][i2]):
+                return True # yup should be marked
+        return False
+
+    def minimize(self):
+        enum = enumerate
+        ar, hsh, st_ar = self.gen_ar(self.states, self.accept_states)
+        for x,nest in enum(ar):
+            for y,v in enum(nest):
+                if type(v) == tuple:
+                    a, b = v
+                    if self.check_m(ar, hsh, a,b):
+                        # then mark as checked
+                        ar[x][y] = 0
+    
+        for x in RL(ar):
+            for y in RL(ar[x]):
+                if ar[x][y] and (ar[x][y] is not True):
+                    print(f"({st_ar[x], st_ar[y]}) should be minimized.")
+
 
 def test():
     f = FSA(
         set(['0','1']),
         {
-            'q0' : {'0':'q1', '1':'q3'},
-            'q1' : {'0':'q2', '1':'q0'},
-            'q2' : {'0':'q2', '1':'q2'},
-            'q3' : {'0':'q0', '1':'q2'}
+            'a' : {'0':'b','1':'c'},
+            'b' : {'0':'b','1':'d'},
+            'c' : {'0':'c','1':'d'},
+            'd' : {'0':'d','1':'d'}
         },
-        'q0'
+        'a',
+        'd'
+
     )
-    ctr = 0
-    for i in range(6):
-        for e in all_strings(['0','1'], i):
-            if f.prun(e) == 'q0':
-                ctr += 1
-    
-    assert ctr == 7, "??"
-    print(ctr)
-    
+    #f.show()
+    f.minimize()
 
 
-
+test()
 

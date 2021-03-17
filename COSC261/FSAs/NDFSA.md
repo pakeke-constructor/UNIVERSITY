@@ -13,4 +13,8 @@ can have more or less than 1 output per symbol.
   the NDFSA will stop execution.
 
 
+# passing / truthyness:
+If a passing state is reachable for a string,
+the string is passed.
+(Even if there is only 1 path that leads to the passing state)
 
