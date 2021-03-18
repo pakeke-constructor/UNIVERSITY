@@ -102,31 +102,39 @@ class FSA:
     def minimize(self):
         enum = enumerate
         ar, hsh, st_ar = self.gen_ar(self.states, self.accept_states)
-        for x,nest in enum(ar):
-            for y,v in enum(nest):
-                if type(v) == tuple:
-                    a, b = v
-                    if self.check_m(ar, hsh, a,b):
-                        # then mark as checked
-                        ar[x][y] = 0
-    
+        rep = True
+        while rep:
+            rep = False
+            for x,nest in enum(ar):
+                for y,v in enum(nest):
+                    if type(v) == tuple:
+                        a, b = v
+                        if self.check_m(ar, hsh, a,b):
+                            # then mark as checked
+                            rep = True
+                            ar[x][y] = 0
+
         for x in RL(ar):
             for y in RL(ar[x]):
                 if ar[x][y] and (ar[x][y] is not True):
+                    rep = True
                     print(f"({st_ar[x], st_ar[y]}) should be minimized.")
+                    ar[x][y] = True
 
 
 def test():
     f = FSA(
         set(['0','1']),
         {
-            'a' : {'0':'b','1':'c'},
-            'b' : {'0':'b','1':'d'},
-            'c' : {'0':'c','1':'d'},
-            'd' : {'0':'d','1':'d'}
+            '0' : {'0':'1','1':'2'},
+            '1' : {'0':'2','1':'3'},
+            '2' : {'0':'4','1':'0'},
+            '3' : {'0':'1','1':'4'},
+            '4' : {'0':'3','1':'5'},
+            '5' : {'0':'3','1':'4'}
         },
-        'a',
-        'd'
+        '0',
+        '1'
 
     )
     #f.show()
