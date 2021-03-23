@@ -163,7 +163,39 @@ class Vr(object):
         return ar
 
     @classmethod
-    def bft(cls, root):
+    def bfs(cls, root):
+        '''
+            breadth first search
+        '''
+        if isinstance(root, int):
+            root = cls.Verts[root]#conv to obj
+
+        q = Q([root])
+        cache = []
+        seen = set([root.n])
+
+        root = None
+
+        while len(q) > 0:
+            root = q.dequeue()
+            cache.append(root)
+            for e in root.chil:
+                if not (e.n in seen):
+                    q.queue(e)
+                    e._parent = root
+                    seen.add(e.n)
+
+        ret = []
+        for i in range(cls.N):
+            v = cls.Verts[i]
+            if v._parent:
+                ret.append(cls.Verts[i]._parent.n)
+            else:
+                ret.append(None)
+        return ret
+
+    @classmethod
+    def bf_tag(cls, root):
         '''
             breadth first tag
         '''
@@ -223,6 +255,7 @@ def adjacency_list(graph_str):
     return Vr.adj_list()
 
 
+
 def adjacency_matrix(graph_str):
     Vr.ct_str(graph_str)
     return Vr.adj_mat()
@@ -230,9 +263,10 @@ def adjacency_matrix(graph_str):
 
 def bfs_tree(adj_list, start):
     Vr.ct_adj_list(adj_list)
-    ret = Vr.bft(Vr.Verts[start])
+    ret = Vr.bfs(Vr.Verts[start])
     Vr.clear()
     return ret
+
 
 def dfs_tree(adj_list, start):
     Vr.ct_adj_list(adj_list)
@@ -245,3 +279,7 @@ def dfs_tree(adj_list, start):
             ret[v.n]=(v._parent)
     Vr.clear()
     return ret
+
+
+
+
