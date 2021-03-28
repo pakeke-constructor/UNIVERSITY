@@ -99,7 +99,7 @@ class FSA:
                 return True # yup should be marked
         return False
 
-    def minimize(self):
+    def show_minimize(self):
         enum = enumerate
         ar, hsh, st_ar = self.gen_ar(self.states, self.accept_states)
         rep = True
@@ -118,7 +118,7 @@ class FSA:
             for y in RL(ar[x]):
                 if ar[x][y] and (ar[x][y] is not True):
                     rep = True
-                    print(f"({st_ar[x], st_ar[y]}) should be minimized.")
+                    print(f"({st_ar[x], st_ar[y]}) should be show_minimized.")
                     ar[x][y] = True
 
 
@@ -138,7 +138,7 @@ def test():
 
     )
     #f.show()
-    f.minimize()
+    f.show_minimize()
 
 
 test()
