@@ -90,7 +90,6 @@ def is_weighted(adj_list):
                 return True
     return False
 
-
 def transpose(adj_list):
     m = transpose_matrix(adjacency_matrix(adj_list))
     if is_weighted(adj_list):

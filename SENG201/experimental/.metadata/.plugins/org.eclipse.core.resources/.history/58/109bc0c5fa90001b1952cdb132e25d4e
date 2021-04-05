@@ -1,0 +1,31 @@
+
+
+
+package lab5;
+
+
+import org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+
+
+
+
+public class RocketShipTest {
+	
+	public static void main(String[] a){
+		System.out.println("dfgjdfkjdf");
+	}
+
+	public void takeOffTest(){
+		RocketShip r = new RocketShip(50);
+		r.takeOff();	
+	}
+	
+	public static void main(String[] argv){
+		System.out.println("gkffdfd");
+	}
+	
+}
+
+

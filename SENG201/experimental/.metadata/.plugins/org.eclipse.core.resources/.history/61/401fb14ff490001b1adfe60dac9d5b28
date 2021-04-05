@@ -1,0 +1,22 @@
+
+
+package lab5;
+
+
+import org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+
+
+
+public class RocketShipTest {
+
+	public void takeOffTest(){
+		RocketShip r = new RocketShip(50);
+		r.takeOff();	
+	}
+	
+	public static Main(String[] argv){
+	}
+	
+}
