@@ -123,6 +123,47 @@ def top_sorts(adj_list):
     return sorts
 
 
+'''
+L ← Empty list that will contain the sorted elements
+S ← Set of all nodes with no incoming edge
+
+while S is not empty do
+    remove a node n from S
+    add n to L
+    for each node m with an edge e from n to m do
+        remove edge e from the graph
+        if m has no other incoming edges then
+            insert m into S
+
+if graph has edges then
+    return error   (graph has at least one cycle)
+else 
+    return L   (a topologically sorted order)
+'''
+
+import copy
+
+def top_sort(adj_list):
+    adj_list = copy.deepcopy(adj_list)
+    L = []
+    S = set(range(adj_list)) # Getting the set of verts with no incoming edge
+    for vert in range(len(adj_list)):
+        for v, w in adj_list[vert]:
+            S.remove(v)
+
+    while len(S) > 0:
+        n = S.pop()
+        L.append(n)
+        for v, w in adj_list[n]:
+            
+
+
+
+
+
+
+
+
 
 '''
 1 procedure Dijkstra(Adj, s)
@@ -163,11 +204,6 @@ def dijkstra(adj, start, d_s=None, p_s=None, in_s=None):
     parent = [None] * n
     distance[start]=0
     while not all(in_tree):
-        print(distance)
-        print(parent)
-        print(in_tree)
-        print("\n")
-
         u = next_vertex(in_tree, distance)
         in_tree[u] = True
         for v,w in adj[u]:
@@ -188,7 +224,8 @@ U 5 W
 4 3 2
 '''
 
-dijkstra(adjacency_list(u),3)
+if __name__ == "__main__":
+    dijkstra(adjacency_list(u),3)
 
 
 

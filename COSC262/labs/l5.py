@@ -1,5 +1,6 @@
 
 
+
 EN=enumerate
 
 
@@ -13,6 +14,7 @@ def get_info(info):
         if info[2] == "W":
             weighted = True
     return (directed, num_verts, weighted)
+
 
 
 def adjacency_list(st):
