@@ -36,6 +36,7 @@ def adjacency_list(st):
     return adj_list
 
 
+
 def make2d(n):
     mat = []
     for _ in range(n):
@@ -155,10 +156,7 @@ def top_sort(adj_list):
         n = S.pop()
         L.append(n)
         for v, w in adj_list[n]:
-            
-
-
-
+            pass
 
 
 
@@ -182,16 +180,24 @@ def top_sort(adj_list):
 14 return parent, distance
 '''
 
+
+def next_vertex(in_tree, distance):
+    n_visited = []
+    for i, vertex in enumerate(in_tree):
+        if vertex == False:
+            n_visited.append((distance[i], i))
+    return min(n_visited)[1]
+
+
+
+
 def next_vertex(in_tree, distance):
     n_visited = []
     for i, vertex in enumerate(in_tree):
         if vertex == False:
             n_visited.append((distance[i], i))
     n_visited.sort()
-    weight, next_vert = n_visited[0]
-    return next_vert
-
-
+    return n_visited[0][1]
 
 
 
@@ -213,6 +219,24 @@ def dijkstra(adj, start, d_s=None, p_s=None, in_s=None):
     return parent, distance
 
 
+from math import inf
+
+def prims(adj, s):
+    n = len(adj)
+    inn = [False]*n
+    distance = [inf] * n
+    parent = [None] * n
+
+    distance[s] = 0
+    while not all(inn):
+        u = next_vertex(inn, distance)
+        inn[u] = True
+        for v, w in adj[u]:
+            if not inn[u] or weight < distance[v]:
+                distance[v] = weight
+                parent[v] = u
+        
+
 u = '''\
 U 5 W
 0 1 1
@@ -225,7 +249,7 @@ U 5 W
 '''
 
 if __name__ == "__main__":
-    dijkstra(adjacency_list(u),3)
+    print(dijkstra(adjacency_list(u),3))
 
 
 
@@ -241,5 +265,16 @@ def is_strongly_connected(adj_list):
         if len(conn_list) != len(adj_list):
             return False
     return True
+
+
+EN = enumerate
+RL = lambda x: range(len(x))
+
+def next_vertex(intree, distances):
+    for i,each in EN(distances):
+
+
+
+
 
 
