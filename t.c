@@ -18,11 +18,15 @@ typedef struct {
 #include <stdio.h>
 #include <stdlib.h>
 
+
+
 int main(){
-    B* b = (B*)malloc(sizeof b);
-
-    printf("ptr: %d\n", (int)add(b));
-
+    int x = 0;
+    {
+        int y = 10;
+        printf("y: %d\n",y);
+    }
+    printf("y: %d\n",y);
     return 0;
 }
 
