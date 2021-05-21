@@ -112,6 +112,9 @@ class Token:
     ID    = 'ID'
     READ  = 'READ'
     WRITE = 'WRITE'
+    NOT   = 'NOT'
+    AND   = 'AND'
+    OR    = 'OR'
 
     # The following list gives the regular expression to match a token.
     # The order in the list matters for mimicking Flex behaviour.
@@ -141,6 +144,9 @@ class Token:
         (DIV,   '/'),
         (NEQ,   '!='),
         (NUM,   '[0-9]+'),
+        (AND,   'and'),
+        (OR,    'or'),
+        (NOT,   'not'),
         (ID,    '[a-z]+')
     ]
 
@@ -273,15 +279,6 @@ class If_Else_AST:
                 + self.then.indented(level + 1) + self.elsethen.indented(level + 1)
 
     def code(self):
-        '''
-        IF false: goto l1
-            then-code
-        IF true: goto l2
-        
-        :l1:
-            else-code
-        :l2:
-        '''
         l1 = label_generator.next()
         l2 = label_generator.next()
         ret = self.cond.false_code(l1) + self.then.code() + self.cond.true_code(l2) + \
@@ -364,6 +361,7 @@ class Comparison_AST:
                self.right.indented(level+1)
 
     def true_code(self, label):
+        # jumps if expr is true
         op = { '<':'if_icmplt', '=':'if_icmpeq', '>':'if_icmpgt',
                '<=':'if_icmple', '!=':'if_icmpne', '>=':'if_icmpge' }
         return self.left.code() + \
@@ -371,6 +369,7 @@ class Comparison_AST:
                op[self.op] + ' ' + label + '\n'
 
     def false_code(self, label):
+        # jumps if expr is false
         # Negate each comparison because of jump to "false" label.
         op = { '<':'if_icmpge', '=':'if_icmpne', '>':'if_icmple',
                '<=':'if_icmpgt', '!=':'if_icmpeq', '>=':'if_icmplt' }
@@ -529,6 +528,20 @@ def bool_expression():
     pass
 
 
+def bool_term():
+    factors = []
+    factors.append(bool_factor())
+    while scanner.lookahead == Token.AND:
+        scanner.consume(Token.AND):
+        
+
+
+def bool_factor():
+    
+
+    
+
+
 def identifier():
     value = scanner.consume(Token.ID)[1]
     return Identifier_AST(value)
@@ -563,33 +576,6 @@ if scanner.lookahead() != None:
     sys.exit()
 
 
-'''
-a := 1;
-b := 1;
-
-while a < 50 do
-    write a;
-    t := a;
-    a := b;
-    b := b + t
-end
-
-'''
-
-
-
-'''
-z := 2;
-if z < 3 then
-  z := 1
-else
-  z := 0
-end;
-
-write z
-'''
-
-
 
 
 # Uncomment the following to test the parser without the code generator.
@@ -611,3 +597,115 @@ from os import system
 
 system("java -Xmx100m -jar jasmin.jar Program.j")
 
+'''
+21
+21
+21
+21
+5
+7
+7
+7
+7
+5
+7
+7
+7
+7
+7
+7
+7
+7
+7
+7
+14
+14
+14
+14
+14
+14
+14
+14
+14
+14
+10
+10
+10
+10
+10
+10
+10
+10
+10
+5
+5
+5
+5
+5
+5
+'''
+
+
+'''
+21
+21
+21
+21
+5
+7
+7
+7
+7
+5
+7
+7
+7
+7
+7
+7
+7
+7
+7
+7
+14
+14
+14
+14
+14
+14
+14
+14
+14
+14
+10
+10
+10
+10
+10
+10
+10
+10
+10
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+5
+'''
