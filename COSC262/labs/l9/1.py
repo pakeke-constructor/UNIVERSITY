@@ -24,6 +24,41 @@ def max_value_brute(items, capacity, n=0):
 
 
 
+def max_value(items, capacity):
+    array = []
+    for _ in range(len(items) + 1):
+        array.append([(0,[]) for _ in range(capacity + 1)])
+    
+    for i in range(1, len(items) + 1):
+        for w in range(1, capacity + 1):
+            value = items[i-1].value
+            weight = items[i-1].weight
+            if w - weight < 0:
+                soln1 = (0,[])
+            else:
+                tup = array[i-1][w-weight]
+                soln1 = (value + tup[0], tup[1] + [items[i-1]])
+            soln2 = (array[i-1][w][0], array[i-1][w][1])
+            array[i][w] = max(soln1, soln2, key=lambda x: x[0])
+    return array[len(items)][capacity]
+
+
+# The example in the lecture notes
+items = [Item(45, 3),
+         Item(45, 3),
+         Item(80, 4),
+         Item(80, 5),
+         Item(100, 8)]
+maximum, selected_items = max_value(items, 10)
+print(maximum)
+print(selected_items)
+# Check the returned item list with a hidden function
+check_item_list(items, selected_items, maximum)
+
+
+
+
+
 
 def max_value(items, capacity):
     # V[i, w] = max( Vi + V[i-1, w-Wi] , V[i-1, w] )
@@ -66,15 +101,4 @@ def max_value(items, capacity):
     return arr[len(items)][capacity]
 
 
-
-# The example in the lecture notes
-items = [Item(45, 3),
-         Item(45, 3),
-         Item(80, 4),
-         Item(80, 5),
-         Item(100, 8)]
-maximum, selected_items = max_value(items, 10)
-print(maximum)
-# Check the returned item list with a hidden function
-print(selected_items)
 

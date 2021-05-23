@@ -26,6 +26,31 @@ def lcs(s1, s2, mem=None):
     mem[(s1,s2)] = solution
     return solution
 
+def lcs(s1, s2, cache=None):
+    if cache is None:
+        cache = {}
+
+    if s1 == "" or s2 == "":
+        return ""
+
+    if s1[-1]==s2[-1]:
+        return lcs(s1[:-1],s2[:-1],cache) + s1[-1]
+    
+    if (s1[:-1], s2) in cache:
+        soln1 = cache[(s1[:-1],s2)]
+    else:
+        soln1 = lcs(s1[:-1], s2, cache)
+    
+    if (s1,s2[:-1]) in cache:
+        soln2 = cache[(s1,s2[:-1])]
+    else:
+        soln2 = lcs(s1, s2[:-1], cache)
+    
+    solution = max(soln1, soln2, key=lambda x: len(x))
+    cache[(s1,s2)] = solution
+    return solution
+    
+
 # A simple test that should run without caching
 s1 = "abcde"
 s2 = "qbxxd"
