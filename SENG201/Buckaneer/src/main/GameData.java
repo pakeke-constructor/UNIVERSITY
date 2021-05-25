@@ -2,6 +2,7 @@ package main;
 
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.HashMap;
 
 public class GameData {
 	/*
@@ -11,16 +12,19 @@ public class GameData {
 
 	*/
 	private static Toolkit t = Toolkit.getDefaultToolkit();
-	private Image path01 = t.getImage("images/paths/path01.png");
-	private Image path02 = t.getImage("images/paths/path02.png");
-	private Image path03 = t.getImage("images/paths/path03.png");
-	private Image path04 = t.getImage("images/paths/path04.png");
-	private Image path12 = t.getImage("images/paths/path12.png");
-	private Image path13 = t.getImage("images/paths/path13.png");
-	private Image path14 = t.getImage("images/paths/path14.png");
-	private Image path23 = t.getImage("images/paths/path23.png");
-	private Image path24 = t.getImage("images/paths/path24.png");
-	private Image path34 = t.getImage("images/paths/path34.png");
+	private static Image path01 = t.getImage("images/paths/path01.png");
+	private static Image path02 = t.getImage("images/paths/path02.png");
+	private static Image path03 = t.getImage("images/paths/path03.png");
+	private static Image path04 = t.getImage("images/paths/path04.png");
+	private static Image path12 = t.getImage("images/paths/path12.png");
+	private static Image path13 = t.getImage("images/paths/path13.png");
+	private static Image path14 = t.getImage("images/paths/path14.png");
+	private static Image path23 = t.getImage("images/paths/path23.png");
+	private static Image path24 = t.getImage("images/paths/path24.png");
+	private static Image path34 = t.getImage("images/paths/path34.png");
+	
+	// hashMap that points to all path drawing objects, i.e. path34, path12, etc.
+	private static HashMap<String, Image> paths = new HashMap<String, Image>();
 	private static Image empty = t.getImage("images/empty.png");
 	private Button islandButton0 = new Button(10, 150, 370, 500);
 	private Button islandButton1 = new Button(440, 570, 290, 370);
@@ -46,6 +50,36 @@ public class GameData {
 	private static int[][] sellingData;
 	private static int[][] buyingData;
 	
+	static {
+		// initialize hashMap of path images
+		for (int i=0; i<5; i++) {
+			for (int j=0; j<5; j++) {
+				String key1 = ("path" + i) + j;
+				String key2 = ("path" + j) + i;
+				if ((i != j) && (!paths.containsKey(key1)) && (!paths.containsKey(key2))) {
+					Image image = t.getImage(("images/paths/path" + i) + j + ".png");
+					paths.put(key1, image);
+					paths.put(key2, image);
+				}
+			}
+		}
+	}
+	
+	public static Image getPathImage(int from, int to) {
+		/*
+		 * This static method returns the path image from island ID one, to island ID 2.
+		 * 
+		 * @param from the island ID of the start island
+		 * @param to the island ID of the end island
+		 * @return Image the image sprite from island `from` to island `to`.
+		 * 
+		 */
+		String key = ("path" + to) + from;
+		if (!paths.containsKey(key)) {
+			throw new IllegalArgumentException("Unknown path image requested: " + key);
+		}
+		return paths.get(("path" + to) + from);
+	}
 	
 	public static void setPrices() {
 		/*

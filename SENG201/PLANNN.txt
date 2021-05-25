@@ -1,0 +1,14 @@
+
+PLAN FOR TODAY ::
+
+4:20 -> 5:00
+Create UML diagram.
+Change classes such that they fit around the UML diagram.
+
+class GameObject:
+	holds rendering stuff, i.e. position and image
+
+	Make Ship and Path and PriceSprite inherit from this!
+
+	
+

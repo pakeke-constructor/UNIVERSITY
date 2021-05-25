@@ -1,9 +1,15 @@
 package main;
 
+import java.awt.Toolkit;
 
-public class Ship {
-	public int x;
-	public int y;
+
+
+public class Ship extends GameObject{
+	//public int x;
+	//public int y;
+	private boolean timerStart = false;
+	private boolean moved = false;
+	private static GameLogic window;
 	private static int money = 5000;
 	private static int hull = 100;
 	private static int repairPrice = 0;
@@ -14,21 +20,29 @@ public class Ship {
 	private static int selectedDays = 2000;
 	private static int fightingChance = 3;
 	private static double sellingModifier = 0;
+	private static Toolkit t = Toolkit.getDefaultToolkit();
 	
+	/*
+		@param startX starting X position
+		@param startY starting Y position
+	*/
 	public Ship(int startX, int startY) {
-		/*
-		@param startX starting X pos
-		@param startY starting Y pos
-		*/
-		x = startX;
-		y = startY;
+		super(t.getImage("images/player.png"), startX, startY);
 	}
 	
-	public static void setRepairPrice() {
-		/*
+	public boolean isMoving() {
+		return moved;
+	}
+	
+	public void setMoving(boolean move) {
+		moved = move;
+	}
+	
+	/*
 		updates and mutates ship repair price based on hull strength
 		and repairModifier
-		*/
+	*/
+	public static void setRepairPrice() {
 		repairPrice = ((100 - hull)*(30 - repairModifier));
 	}
 	
@@ -37,9 +51,6 @@ public class Ship {
 	}
 	
 	public static int getProfit() {
-		/*
-		
-		*/
 		return Math.max(0, money-5000);
 	}
 	
@@ -90,7 +101,6 @@ public class Ship {
 		hull += nHull;
 		if (hull <= 0) {
 			GameLogic.state = State.GAMEOVER;
-			
 		}
 	}
 	
