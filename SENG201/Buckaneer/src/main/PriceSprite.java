@@ -4,19 +4,31 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
-public class PriceSprite {
+/**
+ * PriceSprite is the class responsible for displaying the text required 
+ * each object has an image, x and y component that is used to draw itself on the screen
+ */
+public class PriceSprite extends GameObject {
+    private static Toolkit t = Toolkit.getDefaultToolkit();
+    
+    /**
+     * Constructs PriceSprite object
+     * 
+     * @param nSprite the image object to pass in
+     * @param nx x position
+     * @param ny y position
+     */
+    public PriceSprite(Image nSprite, int nx, int ny) {
+        super(nSprite, nx, ny);
+    }
 	
-	private Image sprite;
-	private int x;
-	private int y;
-	private static Toolkit t = Toolkit.getDefaultToolkit();
 	
-	public PriceSprite(Image nSprite, int nx, int ny) {
-		sprite = nSprite;
-		x = nx;
-		y = ny;
-	}
-	
+	/**
+     * Creates the text seen in the shop, and returns the text
+     * as an array of images.
+     * 
+     * @return An array of PriceSprite objects that denotes text
+     */
 	public static ArrayList<PriceSprite> constructShopText(){
 		ArrayList<PriceSprite> returning = new ArrayList<PriceSprite>();
 		//inventory and selling and buying
@@ -73,7 +85,11 @@ public class PriceSprite {
 	}
 	
 	
-	
+	 /**
+     * Creates inventory text and returns it as an array of PriceSprite Objects
+     * 
+     * @return An ArrayList of PriceSprite objects that denotes the text shown in the inventory
+     */
 	public static ArrayList<PriceSprite> constructInventoryText(){
 		ArrayList<PriceSprite> returning = new ArrayList<PriceSprite>();
 		ArrayList<String[]> shipLog = InventoryHandler.getPurchaseHistory();
@@ -106,15 +122,27 @@ public class PriceSprite {
 		}
 		//hull display
 		tempSprite = t.getImage("images/text/n" + Integer.toString((int) Math.floor(Ship.getHull() / 100)) + ".png");
-		returning.add(new PriceSprite(tempSprite, 540, 140));
+		returning.add(new PriceSprite(tempSprite, 580, 140));
 		int middleInt = (int) Math.floor((Ship.getHull() - (Math.floor(Ship.getHull()/100) * 100)) / 10);
 		tempSprite = t.getImage("images/text/n" + Integer.toString(middleInt) + ".png");
-		returning.add(new PriceSprite(tempSprite, 555, 140));
+		returning.add(new PriceSprite(tempSprite, 595, 140));
 		tempSprite = t.getImage("images/text/n" + Integer.toString(Ship.getHull()% 10) + ".png");
-		returning.add(new PriceSprite(tempSprite, 570, 140));
+		returning.add(new PriceSprite(tempSprite, 610, 140));
+		
+		String shipName = KeyboardHandler.getShipName();
+		for(int i=0; i<shipName.length(); i++) {
+			tempSprite = t.getImage("images/chars/" + shipName.charAt(i) + ".png");
+			returning.add(new PriceSprite(tempSprite, 350 + (15*i), 148));
+		}
 		return returning;
 	}
 	
+	
+	/**
+     * Returns an ArrayList of PriceSprite objects that 
+     * 
+     * @return an ArrayList of PriceSprite objects that denotes the price information box accessible in the map
+     */
 	public static ArrayList<PriceSprite> constructPriceInfoText(){
 		ArrayList<PriceSprite> returning = new ArrayList<PriceSprite>();
 		Image tempSprite;
@@ -123,27 +151,33 @@ public class PriceSprite {
 				
 				int price = GameData.getBuyPrice(i, j);
 				tempSprite = t.getImage("images/text/k" + Integer.toString((int) Math.floor(price / (100))) + ".png");
-				returning.add(new PriceSprite(tempSprite, 440 + (85 * j), 220 + (65 * i)));
+				returning.add(new PriceSprite(tempSprite, 440 + (85 * j), 220 + (58 * i)));
 				int midPrice = (int) Math.floor((price - (Math.floor(price/100) * 100)) / 10);
 				tempSprite = t.getImage("images/text/k" + Integer.toString(midPrice) + ".png");
-				returning.add(new PriceSprite(tempSprite, 448+(85*j), 220 + (65 * i)));
+				returning.add(new PriceSprite(tempSprite, 448+(85*j), 220 + (58 * i)));
 				tempSprite = t.getImage("images/text/k" + Integer.toString((int) (price % 10)) + ".png");
-				returning.add(new PriceSprite(tempSprite, 456+(85*j), 220 + (65 * i)));
+				returning.add(new PriceSprite(tempSprite, 456+(85*j), 220 + (58 * i)));
 				//buying
 				price = GameData.getSellPrice(i, j);
 				tempSprite = t.getImage("images/text/k" + Integer.toString((int) Math.floor(price / (100))) + ".png");
-				returning.add(new PriceSprite(tempSprite, 470 + (85*j), 220 + (65 * i)));
+				returning.add(new PriceSprite(tempSprite, 470 + (85*j), 220 + (58 * i)));
 				midPrice = (int) Math.floor((price - (Math.floor(price/100) * 100)) / 10);
 				tempSprite = t.getImage("images/text/k" + Integer.toString(midPrice) + ".png");
-				returning.add(new PriceSprite(tempSprite, 478+(85*j), 220 + (65*i)));
+				returning.add(new PriceSprite(tempSprite, 478+(85*j), 220 + (58*i)));
 				tempSprite = t.getImage("images/text/k" + Integer.toString((int) (price % 10)) + ".png");
-				returning.add(new PriceSprite(tempSprite, 486+(85*j), 220 + (65 * i)));
+				returning.add(new PriceSprite(tempSprite, 486+(85*j), 220 + (58 * i)));
 			}
 		}
 		return returning;
 	}
 	
-	
+	/**
+     * Returns an array of PriceSprite objects to show a game over screen state.
+     * Note that although prices aren't explicitly shown here, the priceSprite object
+     * is still used because of the well-functioning text code.
+     * 
+     * @return An ArrayList of PriceSprite objects that render the game over state in text
+     */
 	public static ArrayList<PriceSprite> getGameOverText(){
 		ArrayList<PriceSprite> returning = new ArrayList<PriceSprite>();
 		//selected days display
@@ -180,18 +214,28 @@ public class PriceSprite {
 			tempSprite = t.getImage("images/text/n" + scoreString.charAt(i) + ".png");
 			returning.add(new PriceSprite(tempSprite, 1050 + (15*i), 400));
 		}
+		String shipName = KeyboardHandler.getShipName();
+		for(int i=0; i<shipName.length(); i++) {
+			tempSprite = t.getImage("images/chars/" + shipName.charAt(i) + ".png");
+			returning.add(new PriceSprite(tempSprite, 520 + (15*i), 480));
+		}
 		return returning;
 	}
 	
-	public Image getImage() {
-		return sprite;
-	}
 	
-	public int getX() {
-		return x;
-	}
-	
-	public int getY() {
-		return y;
+	/**
+     * Displays the name of the ship that the player is typing
+     * 
+     * @return An ArrayList of PriceSprite objects that denotes the ship name
+     */
+	public static ArrayList<PriceSprite> getMenuText(){
+		ArrayList<PriceSprite> returning = new ArrayList<PriceSprite>();
+		String shipName = KeyboardHandler.getShipName();
+		Image tempSprite;
+		for(int i=0; i<shipName.length(); i++) {
+			tempSprite = t.getImage("images/chars/" + shipName.charAt(i) + ".png");
+			returning.add(new PriceSprite(tempSprite, 550 + (15*i), 148));
+		}
+		return returning;
 	}
 }

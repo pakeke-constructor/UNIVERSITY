@@ -4,17 +4,18 @@ package main;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+
+/**
+ * The starting class that runs the program.
+ * All this class does is run a main method that
+ * instantiates a GameLogic instance and adds some basic settings.
+ * 
+ */
 public class Main {
-	/*
-	 * The starting class that runs the program.
-	 * All this class does is run a main method that
-	 * instantiates a GameLogic instance and adds some basic settings.
-	 * 
-	 */
 	private  static GameLogic logic = new GameLogic();	
 	
 	public static void main(String[] args) {
-		/*
+		/**
 		 * This method is called when the program initially runs.
 		 * 
 		 * 

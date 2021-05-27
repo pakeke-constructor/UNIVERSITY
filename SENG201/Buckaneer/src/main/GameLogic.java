@@ -15,12 +15,14 @@ import java.util.TimerTask;
 
 import javax.swing.JPanel;
 
+/**
+ * 	This class is a giant state machine that keeps track of the game
+ *  state, rendering, player input, and game objects such as ship
+ *  and island paths. 
+ */
 public class GameLogic extends JPanel implements MouseListener, MouseMotionListener, KeyListener{
-	/*
-	This class is a giant state machine that keeps track of the game
-	state, rendering, player input, and game objects such as ship and island
-	paths.
-	*/
+	private static final long serialVersionUID = 1L;
+	
 	public  static State state;
 	private static int currIsland;
 	private int targetIsland;
@@ -30,7 +32,7 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 	private Path currentPath = new Path();
 	private Image shipImage = t.getImage("images/player.png");
 	private static Image gameOverImage = GameData.getEmpty();
-	private Ship ship = new Ship(170, 460);
+	private Ship ship = new Ship(170, 440);
 	private boolean moved = false;
 	private static boolean paused = false;
 	private boolean timerStart = false;
@@ -42,7 +44,9 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 	private static Image eventImage = GameData.getEmpty();
 	
 	
-	
+	/**
+	 * Initializes some starting values for variables
+	 */
 	public GameLogic() {
 		state = State.MENU;
 		addMouseListener(this);
@@ -57,11 +61,25 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 		//setFocusable(true);
 	}
 	
+	/**
+	 * Main rendering function that handles all the screen render
+	 * calls.
+	 * This function will explicitly call the Path and Ship instances
+	 * .draw() function to draw them to the screen, as well
+	 * as handle the current game state appropriately.
+	 * 
+	 * @param g the Graphics object where the rendering pipeline is located
+	 */
 	public void paint(Graphics g) {
 		Image background = t.getImage("images/background.png");
 		switch(state) {
 		case MENU:
 			g.drawImage(t.getImage("images/mainmenu.jpg"), 0, 0, this);
+			ArrayList<PriceSprite> menuSprites = PriceSprite.getMenuText();
+			for(PriceSprite sprite : menuSprites) {
+				g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), this);
+			}
+			g.drawImage(eventImage, 490, 260, this);
 			g.dispose();
 			break;
 		case MAP:
@@ -89,7 +107,7 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 			g.setColor(new Color(173, 216, 230));
 			g.fillRect(0, 0, 1280, 720);
 			g.drawImage(background, 0, 0, this);
-			g.drawImage(t.getImage("images/shop (2).jpg"), 240, 60, this);
+			g.drawImage(t.getImage("images/shop.jpg"), 240, 60, this);
 			ArrayList<PriceSprite> priceSprites = PriceSprite.constructShopText();
 			for (PriceSprite sprite : priceSprites) {
 				g.drawImage(sprite.getImage(), sprite.getX(), sprite.getY(), this);
@@ -132,17 +150,27 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 		
 	}
 	
-	/*
+	/**
 	 * @return the event handler for the GameLogic class
 	 */
 	public EventHandler getEventHandler() {
 		return eventHandler;
 	}
 	
+	/**
+	 * sets game state
+	 * 
+	 * @param s the state to change to
+	 */
 	public static void setState(State s) {
 		state = s;
 	}
 	
+	/**
+	 * gets game state
+	 * 
+	 * @return State enumeration variable of class GameLogic
+	 */
 	public static State getState(State s) {
 		return state;
 	}
@@ -157,14 +185,21 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 	@Override
 	public void mouseExited(MouseEvent m) {}
 
+	/**
+	 * Handles mouse press events, as dispatches
+	 * the coordinates to the EventManager.
+	 * 
+	 * @param MouseEvent m the MouseEvent dispatched by JFrame
+	 */
 	@Override
 	public void mousePressed(MouseEvent m) {
 		int mouseX = m.getX();
 		int mouseY = m.getY();
-		System.out.println("x="+mouseX + " y=" + mouseY);
 		switch (state) {
 			case MAP:
+				if(!moved) {
 				mouseClickMapState(mouseX, mouseY);
+				}
 				break;
 			case SHOP:
 				if (eventImage == GameData.getEmpty()) {
@@ -187,40 +222,54 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 				}
 				break;
 			case MENU:
-				handleClickMenuState(mouseX, mouseY);
+				if (eventImage == GameData.getEmpty()) {
+					handleClickMenuState(mouseX, mouseY);
+				}else {
+					eventImage = GameData.getEmpty();
+				}
 				repaint();
 				break;
 		}
 	}
 	
+	/**
+	 * Call-back for handling input in the main menu
+	 * 
+	 * @param mouseX the mouse X position on press
+	 * @param mouseY the mouse Y position on press
+	 */
 	public void handleClickMenuState(int mouseX, int mouseY) {
 		if(mouseX > 500 && mouseX < 780 && mouseY > 535 && mouseY < 660) {
-			state = State.MAP;
-			GameData.setPrices();
+			if(KeyboardHandler.validName()) {
+				state = State.MAP;
+				GameData.setPrices();
+			}else {
+				eventImage = t.getImage("images/invalidname.jpg");
+			}
 		}
 		if (mouseY > 235 && mouseY < 385) {
 			if(mouseX > 93 && mouseX < 340) {
 				Ship.setRepairModifier(0);
-				Ship.setEventChance(2000);
-				Ship.setFightingChance(3);
+				Ship.setEventChance(1500);
+				Ship.setFightingChance(5);
 				Ship.setSellingModifier(0);
 				GameData.setPrices();
 			}else if (mouseX > 373 && mouseX < 600) {
 				Ship.setRepairModifier(15);
 				Ship.setEventChance(1250);
-				Ship.setFightingChance(3);
+				Ship.setFightingChance(5);
 				Ship.setSellingModifier(0);
 				GameData.setPrices();
 			}else if (mouseX > 633 && mouseX < 848) {
 				Ship.setRepairModifier(-10);
-				Ship.setEventChance(2000);
-				Ship.setFightingChance(2);
+				Ship.setEventChance(1500);
+				Ship.setFightingChance(3);
 				Ship.setSellingModifier(0);
 				GameData.setPrices();
 			}else if (mouseX > 873 && mouseX < 1111) {
 				Ship.setRepairModifier(0);
-				Ship.setEventChance(2000);
-				Ship.setFightingChance(5);
+				Ship.setEventChance(1500);
+				Ship.setFightingChance(7);
 				Ship.setSellingModifier(0.3);
 				GameData.setPrices();
 			}
@@ -243,8 +292,13 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 		}
 	}
 	
+	/**
+	 * Call-back for handling mouse input in the shop menu
+	 * 
+	 * @param mouseX the X position of mouse, on press
+	 * @param mouseY the Y position of mouse, on press
+	 */
 	public void mouseClickShopState(int mouseX, int mouseY) {
-		//System.out.println(mouseX + " " + mouseY); 
 		//35 between top and bottom, 20 between buttons
 		int buttonNumClicked = -1;
 		if (mouseY > 253 && mouseY < 609) {
@@ -268,11 +322,27 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 				}
 			}
 		}
+		if (mouseX > 780 && mouseX < 972 && mouseY > 245 && mouseY < 485) {
+			for (int i=0; i < 4;i++) {
+				if(mouseY > (245 + i * 62) && mouseY < (297 + i * 62)) {
+					buttonNumClicked = i;
+				}
+			}
+			if(buttonNumClicked != -1) {
+				Ship.handleUpgrade(buttonNumClicked);
+			}
+		}
 		if (mouseX > 754 && mouseX < 1000 && mouseY > 539 && mouseY < 618) {
 			Ship.handleRepair();
 		}
 	}
 	
+	/**
+	 * Call-back for handling mouse input in the island map
+	 * 
+	 * @param mouseX the X position of mouse, on press
+	 * @param mouseY the Y position of mouse, on press
+	 */
 	public void mouseClickMapState(int mouseX, int mouseY) {
 		int[] xPath = new int[0];
 		int[] yPath = new int[0];
@@ -322,13 +392,18 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 				state = State.SHOP;
 			}
 		}
-		//System.out.println(mouseX + " " + mouseY);
 		if(moved) {
 			moveShip(xPath, yPath);
 		}
 		repaint();
 	}
 	
+	/**
+	 * Moves the ship along a path according to pathDataX and pathDataY
+	 * 
+	 * @param pathDataX the visual path the ship takes in the X direction
+	 * @param pathDataY the visual path the ship takes in the Y direction
+	 */ 
 	public void moveShip(int[] pathDataX, int[] pathDataY) {
 		if (moved && !timerStart) {
 			timerStart = true;
@@ -370,11 +445,16 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 	@Override
 	public void mouseDragged(MouseEvent e) {}
 
+	/**
+	 * JFrame Call-back whenever mouse is moved.
+	 * Handles the visualization of island paths
+	 * 
+	 * @param m the MouseEvent dispatched by JFrame
+	 */
 	@Override
 	public void mouseMoved(MouseEvent m) {
 		int mouseX = m.getX();
 		int mouseY = m.getY();
-		//System.out.println(mouseX + " " + mouseY);
 		switch (state) {
 		case MAP:
 			if (data.getIslandButton0().pressed(mouseX, mouseY)) {
@@ -395,6 +475,9 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 		repaint();
 	}
 	
+	/**
+	 * This method is called if the ship is over no island
+	 */
 	public void handleMouseMoveEmpty() {
 		if(!moved) {
 			targetIsland = -1;
@@ -402,91 +485,59 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 		}
 	}
 	
+	/**
+	 * Mouse is over island 0
+	 */
 	public void mouseOverIsland0() {
 		if (!moved) {
 			targetIsland = 0;
 			currentPath.setPath(currIsland, targetIsland);
-			/*
-			if (currIsland == 1) {
-				currentDrawPath = data.getPath01();
-			} else if (currIsland == 2) {
-				currentDrawPath = data.getPath02();
-			} else if (currIsland == 3) {
-				currentDrawPath = data.getPath03();
-			} else if (currIsland == 4) {
-				currentDrawPath = data.getPath04();
-			}*/
 		}
 	}
 	
+	/**
+	 * Mouse is over island 1
+	 */
 	public void mouseOverIsland1() {
 		if (!moved) {
 			targetIsland = 1;
 			currentPath.setPath(currIsland, targetIsland);
-			/*
-			if (currIsland == 0) {
-				currentDrawPath = data.getPath01();
-			} else if (currIsland == 2) {
-				currentDrawPath = data.getPath12();
-			} else if(currIsland == 3) {
-				currentDrawPath = data.getPath13();
-			} else if (currIsland == 4) {
-				currentDrawPath = data.getPath14();
-			}*/
 		}
 	}
 	
+	/*
+	 * Mouse is over island 2
+	 */
 	public void mouseOverIsland2() {
 		if(!moved) {
 			targetIsland = 2;
 			currentPath.setPath(currIsland, targetIsland);
-			/*
-			if (currIsland == 0) {
-				currentDrawPath = data.getPath02();
-			} else if (currIsland == 1) {
-				currentDrawPath = data.getPath12();
-			} else if (currIsland == 3) {
-				currentDrawPath = data.getPath23();
-			} else if (currIsland == 4) {
-				currentDrawPath = data.getPath24();
-			}*/
 		}
 	}
 	
+	/**
+	 * Mouse is over island 3
+	 */
 	public void mouseOverIsland3() {
 		if(!moved) {
 			targetIsland = 3;
 			currentPath.setPath(currIsland, targetIsland);
-			/*
-			if(currIsland == 0) {
-				currentDrawPath = data.getPath03();
-			}else if (currIsland == 1) {
-				currentDrawPath = data.getPath13();
-			}else if (currIsland == 2) {
-				currentDrawPath = data.getPath23();
-			}else if (currIsland == 4) {
-				currentDrawPath = data.getPath34();
-			}*/
 		}
 	}
 	
+	/**
+	 * Mouse is over island 4
+	 */
 	public void mouseOverIsland4() {
 		if(!moved) {
 			targetIsland = 4;
 			currentPath.setPath(currIsland, targetIsland);
-			/*
-			if(currIsland == 0) {
-				currentDrawPath = data.getPath04();
-			}else if (currIsland == 1) {
-				currentDrawPath = data.getPath14();
-			}else if (currIsland == 2) {
-				currentDrawPath = data.getPath24();
-			}else if (currIsland == 3) {
-				currentDrawPath = data.getPath34();
-			}*/
 		}
 	}
 	
+	/**
+	 * Changes the game time, and updates the day counter if necessary
+	 */
 	public void timeChanged() {
 		int daysLeft = (int) Math.ceil(globalTime / 100);
 		int day1 = daysLeft % 10;
@@ -495,10 +546,18 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 		dayCounter2 = t.getImage("images/text/" + Integer.toString(day1) + ".png");
 	}
 	
+	/**
+	 * Sets GameLogic paused state
+	 * @param pausedVal true if should pause, false otherwise.
+	 */
 	public static void setPaused(boolean pausedVal) {
 		paused = pausedVal;
 	}
 	
+	/**
+	 * gets game's paused state
+	 * @return paused whether game is paused or not.
+	 */
 	public static boolean getPaused() {
 		return paused;
 	}
@@ -509,37 +568,75 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 		
 	}
 
+	/**
+	 * JFrame callback, updates internal GameLogic key state via GameLogic.setCurrentChar.
+	 * @param e KeyEvent dispatched by JFrame event loop
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
-		setCurrentChar(e.getKeyChar());
+		switch(state) {
+		case MAP:
+			setCurrentChar(e.getKeyChar());
+			break;
+		case MENU:
+			KeyboardHandler.handleInput(e.getKeyChar());
+			break;
+		}
 	}
 
+	/**
+	 * Calls for a re-render of the screen
+	 * @param e KeyEvent dispatched by JFrame event loop
+	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
 		repaint();
 	}
 	
-
+	/**
+	 * Gets current key that is down
+	 * @return the current character key that is down
+	 */
 	public static char getCurrentChar() {
 		return currentChar;
 	}
 
+	/**
+	 * Sets current key that is down
+	 * @param currentChar the current key as a character
+	 */
 	public static void setCurrentChar(char currentChar) {
 		GameLogic.currentChar = currentChar;
 	}
 
+	/**
+	 * Sets event image to be drawn (i.e, pirate event, or abandoned ship event.)
+	 * @param eventImage the image to serve as event information box
+	 */
 	public static void setEventImage(Image eventImage) {
 		GameLogic.eventImage = eventImage;
 	}
 	
+	/**
+	 * Gets current island ship is at.
+	 * @return currIsland the integerID of an island
+	 */
 	public static int getCurrentIsland() {
 		return currIsland;
 	}
 
+	/**
+	 * Sets game over Image
+	 * @param ngameOverImage the image denoting the type of lose scenario (if any.)
+	 */
 	public static void setGameOverImage(Image ngameOverImage) {
 		gameOverImage = ngameOverImage;
 	}
 	
+	/**
+	 * gets the global time as an integer
+	 * @return globalTime the time elapsed in days
+	 */
 	public static int getGlobalTime() {
 		return globalTime;
 	}

@@ -1,15 +1,21 @@
 package main;
 
+import static org.junit.Assert.fail;
+
 import java.awt.event.KeyEvent;
 import java.util.Random;
 
+import org.junit.Test;
 
+/**
+ * Handles weather, pirate and abandoned ship events
+ */
 public class EventHandler {
 	
 	private Random random = new Random();
 	private int numberPressed;
 	
-	/*
+	/**
 	 * Generates and calls a random event depending on parameter chance.
 	 * chance = 2: pirates or no event.
 	 * chance = 3: weather, pirates, or no event.
@@ -28,7 +34,7 @@ public class EventHandler {
 		}
 	}
 	
-	/*
+	/**
 	 * 	Invokes a pirate event and shows a pop-up to user.
 	 *  The higher the player's fighting chance, (better items,) the more likely
 	 *  the player is to get away for free. Otherwise, the pirates will take
@@ -37,8 +43,6 @@ public class EventHandler {
 	 *  set to GAMEOVER.
 	 */
 	public void pirateEvent() {
-		/*
-		*/
 		GameLogic.setPaused(true);
 		GameLogic.setEventImage(GameData.getPirateEventMessage1());
 		int randSuccess = random.nextInt(5);
@@ -65,7 +69,7 @@ public class EventHandler {
 		endEvent();
 	}
 	
-	/*
+	/**
 	 * 	Weather event damages hull by a random amount, and shows pop-up 	
 	 */
 	public void weatherEvent() {
@@ -75,7 +79,7 @@ public class EventHandler {
 		endEvent();
 	}
 	
-	/*
+	/**
 	 * Abandoned ship event gives player money and shows pop-up
 	 */
 	public void abandonedShipEvent() {
@@ -85,45 +89,21 @@ public class EventHandler {
 		endEvent();
 	}
 	
-	/*
+	/**
 	 * 	Blocks the game loop until player hits space bar.
 	 * After player hits the space bar, game loop resumes.
 	 */
 	public void endEvent() {
 		while(GameLogic.getCurrentChar() != KeyEvent.VK_SPACE) {
-			//System.out.println(GameLogic.getCurrentChar());
+			System.out.println(GameLogic.getCurrentChar());
 			// block event queue
 		}
 		GameLogic.setCurrentChar(KeyEvent.CHAR_UNDEFINED);
 		GameLogic.setEventImage(GameData.getEmpty());
 		GameLogic.setPaused(false);
 	}
-	
-	/*
-	 * 	Blocks the game loop until player hits key denoted by key tag.
-	 * After player hits the specified key, game loop resumes.
-	 */
-	public void endEvent(int[] validKeys) {
-		boolean isKeyValid = false;
-		for(int i=0; i<validKeys.length; i++) {
-			if(GameLogic.getCurrentChar() == validKeys[i]) {
-				isKeyValid = true;
-			}
-		}
-		while(!isKeyValid) {
-			for(int i=0; i<validKeys.length; i++) {
-				if(GameLogic.getCurrentChar() == validKeys[i]) {
-					isKeyValid = true;
-				}
-			}
-			// block event queue
-		}
-		GameLogic.setCurrentChar(KeyEvent.CHAR_UNDEFINED);
-		GameLogic.setEventImage(GameData.getEmpty());
-		GameLogic.setPaused(false);		
-	}
 
-	/*
+	/**
 	 * 	Takes a character key as a parameter, and mutates the .numberPressed
 	 *  field appropriately.
 	 *  
@@ -132,25 +112,43 @@ public class EventHandler {
 	 *  @return whether the key was recognized or not 
 	*/
 	public boolean validKey(char cChar) {
-		if (cChar == KeyEvent.VK_1) {
+		//System.out.println(cChar);
+		if (cChar == '1') {
 			numberPressed = 1;
 			return true;
-		}else if (cChar == KeyEvent.VK_2) {
+		}else if (cChar == '2') {
 			numberPressed = 2;
 			return true;
-		}else if (cChar == KeyEvent.VK_3) {
+		}else if (cChar == '3') {
 			numberPressed = 3;
 			return true;
-		}else if (cChar == KeyEvent.VK_4) {
+		}else if (cChar == '4') {
 			numberPressed = 4;
 			return true;
-		}else if(cChar == KeyEvent.VK_5) {
+		}else if(cChar == '5') {
 			numberPressed = 5;
 			return true;
-		}else if (cChar == KeyEvent.VK_6) {
+		}else if (cChar == '6') {
 			numberPressed = 6;
 			return true;
 		}
 		return false;
 	}
+	
+	@Test
+	private void Test() {
+        int num_keys = 6;
+        int[] keys = {KeyEvent.VK_1, KeyEvent.VK_2, KeyEvent.VK_3, 
+                        KeyEvent.VK_4, KeyEvent.VK_5, KeyEvent.VK_6};
+        boolean passed;
+        for (int i=0; i<num_keys; i++) {
+            passed = validKey((char) keys[i]);
+            if (!passed) {
+                fail("expected validKey to return true for input " + keys[i]);
+            }
+            if (i + 1 != numberPressed) {
+                fail("expected validKey to equal i + 1");
+            }
+        }
+    }
 }

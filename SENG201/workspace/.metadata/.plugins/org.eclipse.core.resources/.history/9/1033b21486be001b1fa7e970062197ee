@@ -1,0 +1,83 @@
+package main;
+
+import java.awt.Graphics;
+import java.awt.Image;
+
+/*
+ * Base class that other objects inherit from.
+ * 
+ */
+public class GameObject {
+	private Image img;
+	private int x;
+	private int y;
+	
+	public GameObject(Image imgSprite, int posX, int posY) {
+		/*
+		@param imgSprite the image the object takes
+		@param posX x position
+		@param posY y position
+		*/
+		img = imgSprite;
+		x = posX;
+		y = posY;
+	}
+	
+	public void setImage(Image image) {
+		/*
+		 * changes gameObject image.
+		 * @param image the new sprite to change to
+		 */
+		img = image;
+	}
+	
+	public Image getImage() {
+		/*
+		 * getter for GameObject's image
+		 * @return the gameObject's image.
+		 */
+		return img;
+	}
+	
+	public int getX() {
+		/*
+		 *  @return X position
+		 */
+		return x;
+	}
+	
+	public int getY() {
+		/*
+		 *  @return Y position
+		 */
+		return y;
+	}
+	
+	public void setX(int newX) {
+		/*
+		 *  @param newX sets x position to this
+		 */
+		x = newX;
+	}
+	
+	public void setY(int newY) {
+		/*
+		 *  @param newY sets y position to this
+		 */
+		y = newY;
+	}
+	
+	public void draw(Graphics graphics, GameLogic window) {
+		/*
+		 * draws the object at position x, y, with specified image.
+		 */
+		graphics.drawImage(img, x, y, window);
+	}
+}
+
+
+
+
+
+
+

@@ -3,74 +3,74 @@ package main;
 import java.awt.Graphics;
 import java.awt.Image;
 
+/**
+ * Base class that other objects inherit from.
+ * 
+ */
 public class GameObject {
-	/*
-	 * Base class that other objects inherit from.
-	 * 
-	 */
 	private Image img;
 	private int x;
 	private int y;
 	
+	/**
+	 * @param imgSprite the image the object takes
+	 * @param posX x position
+	 * @param posY y position
+	*/
 	public GameObject(Image imgSprite, int posX, int posY) {
-		/*
-		@param imgSprite the image the object takes
-		@param posX x position
-		@param posY y position
-		*/
 		img = imgSprite;
 		x = posX;
 		y = posY;
 	}
 	
+	/**
+	 * changes gameObject image.
+	 * @param image the new sprite to change to
+	 */
 	public void setImage(Image image) {
-		/*
-		 * changes gameObject image.
-		 * @param image the new sprite to change to
-		 */
 		img = image;
 	}
 	
+	/**
+	 * getter for GameObject's image
+	 * @return the gameObject's image.
+	 */
 	public Image getImage() {
-		/*
-		 * getter for GameObject's image
-		 * @return the gameObject's image.
-		 */
 		return img;
 	}
 	
+	/**
+	 *  @return X position
+	 */
 	public int getX() {
-		/*
-		 *  @return X position
-		 */
 		return x;
 	}
 	
+	/**
+	 *  @return Y position
+	 */
 	public int getY() {
-		/*
-		 *  @return Y position
-		 */
 		return y;
 	}
 	
+	/**
+	 *  @param newX sets x position to this
+	 */
 	public void setX(int newX) {
-		/*
-		 *  @param newX sets x position to this
-		 */
 		x = newX;
 	}
 	
+	/**
+	 *  @param newY sets y position to this
+	 */
 	public void setY(int newY) {
-		/*
-		 *  @param newY sets y position to this
-		 */
 		y = newY;
 	}
 	
+	/**
+	 * draws the object at position x, y, with specified image.
+	 */
 	public void draw(Graphics graphics, GameLogic window) {
-		/*
-		 * draws the object at position x, y, with specified image.
-		 */
 		graphics.drawImage(img, x, y, window);
 	}
 }

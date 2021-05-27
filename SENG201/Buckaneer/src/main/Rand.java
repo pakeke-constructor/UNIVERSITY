@@ -1,7 +1,15 @@
 package main;
 
+/**
+ * Static class that is in charge of generating prices
+ * for island shops 
+ */
 class Rand{
 
+	/**
+	 * Creates a 2d array of prices for the shop
+	 * @return a 2d array of prices: integer[island_id][item_id]
+	 */
 	public static int[][] generatePrices(){
 	    // This function assumes that the random seed
 	    // has already been set.
@@ -28,6 +36,14 @@ class Rand{
 	    return prices;
 	}
 	
+	/**
+	 * returns a 2d array with the values changed by a fixed percentage
+	 * 
+	 * @param prices the returned 2d array is based off
+	 * @param percentage the percentage (As a number from 0 to 1) to modify 2d array by
+	 * 
+	 * @return the modified 2d array according to percentage
+	 */
 	public static int[][] modifyPrices(int[][] prices, double percentage) throws IllegalArgumentException {
 	    // lowers prices by percentage
 
@@ -48,21 +64,29 @@ class Rand{
 	    return ret;
 	}
 
-public static void generatePriceTest(){
-    // This function should print a bunch of random prices for values
-    int[][] prices = new int[5][7];
-    prices = generatePrices();
+	/**
+	 * Quick testing function for sanity check
+	 */
+	public static void generatePriceTest(){
+	    // This function should print a bunch of random prices for values
+	    int[][] prices = new int[5][7];
+	    prices = generatePrices();
+	
+	    for (int i=0; i < 5; i++){
+	        System.out.println("=== new island ===");
+	        for (int j=0; j < 7; j++){
+	            System.out.println("price:  " + prices[i][j]);
+	        }
+	    }
+	}
 
-    for (int i=0; i < 5; i++){
-        System.out.println("=== new island ===");
-        for (int j=0; j < 7; j++){
-            System.out.println("price:  " + prices[i][j]);
-        }
-    }
-}
-
-public static int roundTo10(int price){
-	return ((int)(price / 10)) * 10;
-}
+	/**
+	 * Rounds price to nearest 10.
+	 * @param price the integer to round
+	 * @return the rounded int
+	 */
+	public static int roundTo10(int price){
+		return ((int)(price / 10)) * 10;
+	}
 
 }

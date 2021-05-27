@@ -3,14 +3,18 @@ package main;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.HashMap;
+import java.util.Set;
 
+import org.junit.Test;
+
+import static org.junit.Assert.fail;
+
+/**
+ * Class that holds all the internal game information that is unrelated
+ * to the main game state machine.
+ * E.g: Images and price of items and created and generated here.
+ */
 public class GameData {
-	/*
-	Class that holds all the internal game information that is unrelated
-	to the main game state machine.
-	E.g: Images and price of items and created and generated here.
-
-	*/
 	private static Toolkit t = Toolkit.getDefaultToolkit();
 	private static Image path01 = t.getImage("images/paths/path01.png");
 	private static Image path02 = t.getImage("images/paths/path02.png");
@@ -65,15 +69,15 @@ public class GameData {
 		}
 	}
 	
+	/**
+	 * This static method returns the path image from island ID one, to island ID 2.
+	 * 
+	 * @param from the island ID of the start island
+	 * @param to the island ID of the end island
+	 * @return Image the image sprite from island `from` to island `to`.
+	 * 
+	 */
 	public static Image getPathImage(int from, int to) {
-		/*
-		 * This static method returns the path image from island ID one, to island ID 2.
-		 * 
-		 * @param from the island ID of the start island
-		 * @param to the island ID of the end island
-		 * @return Image the image sprite from island `from` to island `to`.
-		 * 
-		 */
 		String key = ("path" + to) + from;
 		if (!paths.containsKey(key)) {
 			throw new IllegalArgumentException("Unknown path image requested: " + key);
@@ -81,31 +85,31 @@ public class GameData {
 		return paths.get(("path" + to) + from);
 	}
 	
+	/**
+	 * randomly generates island prices
+	 */
 	public static void setPrices() {
-		/*
-		randomly generates island prices
-		*/
 		sellingData = Rand.generatePrices();
 		buyingData = Rand.modifyPrices(sellingData, 0.1);
 	}
 	
+	/**
+	 * Queries to find the sell price of an item, on a specific island
+	 * @param island the target island
+	 * @param item the target item
+	*/
 	public static int getSellPrice(int island, int item) {
-		/*
-		Queries to find the sell price of an item, on a specific island
-
-		@param island the target island
-		@param item the target item
-		*/
 		return sellingData[island][item];
 	}
 	
+	
+	/**
+	 * 	Queries to find the buying price of an item, on a specific island
+	 * 
+	 * @param island the target island
+	 * @param item the target item
+	*/
 	public static int getBuyPrice(int island, int item) {
-		/*
-		Queries to find the buying price of an item, on a specific island
-
-		@param island the target island
-		@param item the target item
-		*/
 		return buyingData[island][item];
 	}
 	
@@ -238,4 +242,17 @@ public class GameData {
 	public Button getIslandButton4() {
 		return islandButton4;
 	}
+	
+	 @Test
+	    private void hashTest() {
+	        Set<String> keys = paths.keySet();
+	        for (String str : keys) {
+	            int a1 = (int) str.charAt(str.length() - 2) - '0';
+	            int a2 = (int) str.charAt(str.length() - 1) - '0';
+	            
+	            if (a1 == a2) {
+	                fail("Path added to path hash had same end location");
+	            }
+	        }
+	    }
 }
