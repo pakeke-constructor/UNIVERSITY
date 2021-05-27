@@ -13,33 +13,23 @@ dup
 getstatic java/lang/System.in Ljava/io/InputStream;
 invokespecial java/util/Scanner.<init>(Ljava/io/InputStream;)V
 astore 0
-sipush 1
+sipush 0
 istore 1
-sipush 1
+sipush 0
 istore 2
-sipush 1
+sipush 0
 istore 3
-l1:
-iload 3
-sipush 50
-if_icmpge l2
-iload 2
+sipush 0
 istore 4
-iload 1
 iload 2
-iadd
-istore 2
-iload 4
-istore 1
-iload 3
-sipush 1
-iadd
-istore 3
-getstatic java/lang/System/out Ljava/io/PrintStream;
+iload 2
+imul
+sipush 4
 iload 1
-invokestatic java/lang/String/valueOf(I)Ljava/lang/String;
-invokevirtual java/io/PrintStream/println(Ljava/lang/String;)V
-goto l1
-l2:
+imul
+iload 3
+imul
+isub
+istore 4
 return
 .end method
