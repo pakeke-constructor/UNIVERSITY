@@ -36,7 +36,7 @@ public class InventoryHandler {
 	/**
 	 * 	@param itemID the integer id of the item
 	 *  @param islandNum the integer id of the item to sell from
-	 *  @param 
+	 *  @param price The market price of item sold
 	 */
 	public static void itemSold(int itemID, int islandNum, int price) {
 		shuffle(itemID);

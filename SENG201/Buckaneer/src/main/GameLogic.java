@@ -158,7 +158,7 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 	}
 	
 	/**
-	 * sets game state
+	 * Sets game state
 	 * 
 	 * @param s the state to change to
 	 */
@@ -167,11 +167,10 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 	}
 	
 	/**
-	 * gets game state
-	 * 
-	 * @return State enumeration variable of class GameLogic
+	 * Gets game state
+	 * @return The current state
 	 */
-	public static State getState(State s) {
+	public static State getState() {
 		return state;
 	}
 	
@@ -189,7 +188,7 @@ public class GameLogic extends JPanel implements MouseListener, MouseMotionListe
 	 * Handles mouse press events, as dispatches
 	 * the coordinates to the EventManager.
 	 * 
-	 * @param MouseEvent m the MouseEvent dispatched by JFrame
+	 * @param m the MouseEvent dispatched by JFrame
 	 */
 	@Override
 	public void mousePressed(MouseEvent m) {

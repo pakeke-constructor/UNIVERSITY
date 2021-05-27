@@ -44,6 +44,7 @@ public class KeyboardHandler {
 	/**
 	 * sees if input is valid
 	 * @param cChar the character to check
+	 * @return whether character is valid
 	 */
 	public static boolean charIsValid(char cChar) {
 		for(int i=0; i < validChars.length; i++) {

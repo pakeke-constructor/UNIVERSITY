@@ -69,6 +69,8 @@ public class GameObject {
 	
 	/**
 	 * draws the object at position x, y, with specified image.
+	 * @param graphics The graphics pipeline object
+	 * @param window the JFrame GameLogic window
 	 */
 	public void draw(Graphics graphics, GameLogic window) {
 		graphics.drawImage(img, x, y, window);

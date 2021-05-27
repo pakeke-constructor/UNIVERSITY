@@ -172,7 +172,7 @@ public class Ship extends GameObject{
 	
 	/**
 	 * handles the purchase of an item from a shop
-	 * @param puchaseID the item ID to purchase
+	 * @param purchaseID the item ID to purchase
 	 */
 	public static void handlePurchase(int purchaseID) {
 		if (money >= GameData.getBuyPrice(GameLogic.getCurrentIsland(), purchaseID)) {
@@ -217,7 +217,7 @@ public class Ship extends GameObject{
 	/**
 	 * Handles the upgrades that can be purchased in the shop
 	 * 
-	 * @param purchaseID
+	 * @param purchaseID the ID of the item to purchase
 	 */
 	public static void handleUpgrade(int purchaseID) {
 		System.out.println(purchaseID);

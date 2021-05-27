@@ -11,6 +11,8 @@ public class Button {
 	private int maxY;
 	
 	/**
+	 * Button constructor
+	 * 
 	 * @param x1 the left position of button
 	 * @param y1 the bottom position of button
 	 * @param x2 the right position of button

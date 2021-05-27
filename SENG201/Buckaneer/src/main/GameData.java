@@ -97,6 +97,8 @@ public class GameData {
 	 * Queries to find the sell price of an item, on a specific island
 	 * @param island the target island
 	 * @param item the target item
+	 * 
+	 * @return The sell price of the item
 	*/
 	public static int getSellPrice(int island, int item) {
 		return sellingData[island][item];
@@ -108,6 +110,8 @@ public class GameData {
 	 * 
 	 * @param island the target island
 	 * @param item the target item
+	 * 
+	 * @return The buy price of item
 	*/
 	public static int getBuyPrice(int island, int item) {
 		return buyingData[island][item];
