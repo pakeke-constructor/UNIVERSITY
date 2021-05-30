@@ -159,4 +159,3 @@ def cool_plot():
 
 
 cool_plot()
-
