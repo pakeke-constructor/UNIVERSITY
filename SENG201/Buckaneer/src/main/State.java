@@ -8,3 +8,4 @@ public enum State {
 	INVENTORY,
 	PRICEINFO
 }
+
