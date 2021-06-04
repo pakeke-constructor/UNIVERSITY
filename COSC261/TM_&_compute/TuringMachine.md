@@ -17,7 +17,7 @@ The tape starts off as:
 
 The a is read symbol
 The b is write symbol
-and R stands for move tape right. (L stands for go left.)
+and R stands for move pointer right. (L stands for go left; N for no move.)
 
 
 The TM reads a symbol each iteration. When it reads it, it goes to 
