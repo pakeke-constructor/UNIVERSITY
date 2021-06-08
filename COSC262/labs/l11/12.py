@@ -46,13 +46,28 @@ class QuadTree:
         self.depth = depth
         self.max_leaf_points = max_leaf_points
         self.children = []
-        self.points = [poin for poin in points if ]
-        if len(points) > max_leaf_points and self.depth < QuadTree.MAX_DEPTH:
-            # hardcoded for loop:
-            children.append(
-                QuadTree(points, )
-            ) finish me plz
+        self.is_leaf = True
+        self.points = [poin for poin in points if self.contains(poin)]
 
+        if len(self.points) > max_leaf_points and self.depth < QuadTree.MAX_DEPTH:
+            step = size/4
+            cen = centre - Vec(step,step)
+            new_size = size / 2
+            self.is_leaf = False # "NO."
+            self.children = [
+                QuadTree(self.points, cen, new_size, depth + 1, max_leaf_points),
+                QuadTree(self.points, cen + Vec(0, new_size), new_size, depth + 1, max_leaf_points),
+                QuadTree(self.points, cen + Vec(new_size, 0), new_size, depth + 1, max_leaf_points),
+                QuadTree(self.points, cen + Vec(new_size, new_size), new_size, depth + 1,
+                        max_leaf_points)
+            ]
+    
+    def contains(self, point):
+        "ey yes my brother"
+        return ((self.centre.x-(self.size/2)) <= point.x and\
+               point.x <= (self.centre.x+(self.size/2))) and\
+               ((self.centre.y-(self.size/2)) <= point.y and\
+               point.y <= (self.centre.y+(self.size/2)))
 
     def plot(self, axes):
         """Plot the dividing axes of this node and
@@ -84,4 +99,15 @@ class QuadTree:
 
 
 
-    
+import matplotlib.pyplot as plt
+points = [(60, 15), (15, 60), (30, 58), (42, 66), (40, 70)]
+vecs = [Vec(*p) for p in points]
+tree = QuadTree(vecs, Vec(50, 50), 100)
+print(tree)
+
+# Plot the tree, for debugging only
+axes = plt.axes()
+tree.plot(axes)
+axes.set_xlim(0, 100)
+axes.set_ylim(0, 100)
+plt.show()

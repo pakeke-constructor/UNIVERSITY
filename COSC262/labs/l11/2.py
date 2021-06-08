@@ -172,7 +172,9 @@ def treeprint(tree, indent = 0):
     treeprint(tree.left, indent + 1)
     treeprint(tree.right, indent + 1)
 
-
+nums = [22, 41, 19, 27, 12, 35, 14, 20,  39, 10, 25, 44, 32, 21, 18]
+tree = binary_search_tree(nums)
+treeprint(tree)
 
 
 def main():
@@ -183,5 +185,4 @@ def main():
     axes = plt.axes()
     tree.plot(axes, 25, 35, 0, 0)
     plt.show()
-
 
