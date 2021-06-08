@@ -34,5 +34,19 @@ EG:
 ())(
 
 
+# With top-down derivations, there is leftmost and rightmost derivations.
+## (for bottom-up, see CYK algo.) 
+
+Leftmost derivation, means do top-down, and match stuff on the left first.
+
+Rightmost derivation is the same, but on the right.
+
+### NOTE::
+You may be dubious doing this top-down because you may need to backtrack.
+Trust me- dont worry, just YOLO it. If it is in the exam, the examiner will make it really easy.
+trust.
+
+https://www.tutorialspoint.com/automata_theory/context_free_grammar_introduction.htm
+https://en.wikipedia.org/wiki/Ambiguous_grammar#Addition_and_subtraction
 
 

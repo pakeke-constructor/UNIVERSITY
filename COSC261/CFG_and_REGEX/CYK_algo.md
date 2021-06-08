@@ -50,11 +50,11 @@ that can contain the *combined* grammar rules.
 
 | a | b | ===> |X,Y| Z |
      set prod  X,Y x Z    -->
-ab:   XY, YZ
-    what contains XY, what contains YZ?
+ab:   XZ, YZ
+    what contains XZ, what contains YZ?
         aha!   X contains YZ.
-        nothing contains XY.
-    mark X in box, because it contains an elem from the product.
+        Y contains XZ.
+    mark X,Y in box, because it contains an elem from the product.
 
 
 bb:   Z x Z
@@ -67,7 +67,7 @@ bb:   ZZ
 ```
     _____
   __|   |__
-__| X | W |__
+__|X,Y| W |__
 |X,Y| Z | Z |
 =============
 | a | b | b |
@@ -75,12 +75,12 @@ __| X | W |__
 
 repeat the above step.
 
-| X | W | ==>   XW
-well, nothing contains XW, 
-so the final pattern matched is `XW`.
+| X,Y | W | ==>   XW, YW
+well, K contains XW, so final pattern matched is K.
+
 ```
-    ______
-  __| XW |__
+    _____
+  __| K |__
 __| X | W |__
 |X,Y| Z | Z |
 =============

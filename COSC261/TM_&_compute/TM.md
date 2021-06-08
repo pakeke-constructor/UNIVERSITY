@@ -11,7 +11,13 @@ store any symbol in it's defined alphabet alongside the blank symbol _.
 For example:
 "1001001"
 The tape starts off as:
+
+ |
+ V
 [1][0][0][1][0][0][1]
+
+(with tape pointer in start char position)
+
 
 ### Each TM path will have a label:    a / b, R
 
@@ -24,5 +30,6 @@ The TM reads a symbol each iteration. When it reads it, it goes to
 that path.
 EG: if it read symbol X, and the branch was (X _ _), it would go to that path.
 
-
+## Finishing::
+If a turing machine finishes 
 
