@@ -31,5 +31,7 @@ that path.
 EG: if it read symbol X, and the branch was (X _ _), it would go to that path.
 
 ## Finishing::
-If a turing machine finishes 
+If a turing machine finishes in an accept state, that input is accepted.
+else, it is rejected
+
 
