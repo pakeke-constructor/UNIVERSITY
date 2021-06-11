@@ -26,7 +26,8 @@ Then we can guess a solution similar to how we did it before:
 */
 
 // Lets guess ==>
-Y = X*e^(λ*t) // Where X is a constant vector.
+Y = X*e^(λ*t) // Where X is a constant matrix.
+             // ( X1 would thus be a constant vector. )
 
 // this means that
 Y* = λ*X*e^(λ*t) // simple differentiation rules
@@ -39,7 +40,8 @@ Y* = AY
 λI = A
 det(A-λI) = 0 // oooh shit! lambda is eigenvalue!!!!
 
-// Find lambda values
+// Find lambda values,
+(note that X1 is an eigenvector for eigenvalue λ1.)
 // Boom, you have your general solutions:
 y1(t)
 y2(t)
