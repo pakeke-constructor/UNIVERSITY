@@ -49,7 +49,7 @@ D = |-3 0 |  <<<====================
 
 The principal axes of the ellipse will be
 ```r
- (u, v) = (x, y)*P
+ (u, v) = normalized( P * (x, y) )
 ```
 
 
