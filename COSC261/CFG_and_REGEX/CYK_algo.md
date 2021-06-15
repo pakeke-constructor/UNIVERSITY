@@ -2,6 +2,10 @@
 
 ### Parsing a string with CFG
 
+> NOTE:
+This algo only works for languages in Chompsky Normal form!!!
+
+
 https://www.youtube.com/watch?v=VTH1k-xiswM&ab_channel=EducationAboutStuff
 
 # Algorithm:

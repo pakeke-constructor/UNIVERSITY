@@ -30,7 +30,7 @@ The diagonal matrix of a matrix  <A>  is defined as:
 
 ##### Getting P:
 ` P^-1 ` is the inverse of matrix P,
-and P is made using the eigenvectors of matrix A as coloumns.
+and P is made using the *normalized* eigenvectors of matrix A as coloumns.
 
 ##### Getting D:
 >>> Cheaty way to get D:
@@ -51,5 +51,15 @@ The principal axes of the ellipse will be
 ```r
  (u, v) = normalized( P * (x, y) )
 ```
+
+##### Drawing the ellipse:
+
+If we get the ellipse in the form  (u v) D (u v),
+then we can obviously draw it in the (u, v) plane,
+and translate it over the the (x, y) plane.
+
+
+
+
 
 
