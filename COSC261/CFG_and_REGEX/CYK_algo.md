@@ -8,88 +8,79 @@ This algo only works for languages in Chompsky Normal form!!!
 
 https://www.youtube.com/watch?v=VTH1k-xiswM&ab_channel=EducationAboutStuff
 
-# Algorithm:
-EG: rules:
+
+The CYK algorithm utilizes dynamic programming.
+You just gotta ensure you are constantly looking
+back at the string, and list the substrings:
 
 
-K = XW
-W = ZZ
-X = YX|a|YZ
-Y = Za|XZ
-Z = Xb
+### Lets match the string,  abc
 
-now lets parse the string: <abb>
+A -> a
+B -> b
+C -> c | BC
+Z -> AC
 
-Make a triangle table, with base the size of the string:
-<abb>:
-```
-    _____
-  __|   |__
-__|   |   |__
-|   |   |   |
-=============
-| a | b | b |
-```
-
-- List all the rules in the bottom row that contain
-    the initial character.
-
-=> X and Y contain a.
-=> Z contains b.
-
-```
-    _____
-  __|   |__
-__|   |   |__
-|X,Y| Z | Z |
-=============
-| a | b | b |
-```
+start off with empty tabl like this:
+     ___
+    |   |    substr size 3
+  |   |   |     substrs size 2
+|   |   |   |      substrs size 1 
+-------------
+| a | b | c |      terminals
 
 
-#### Main step:
-Now, list all the rules in the next row
-that can contain the *combined* grammar rules.
-(get combined grammar rules by taking set product.)
+Now for the strings `a, b, c`,
+we gotta find all the rules that matches our substrings of length 1:
+Aha! its   A,B,C
+.
+     ___
+    |   |
+  |   |   |
+| A | B | C |
+-------------
+| a | b | c |
 
-| a | b | ===> |X,Y| Z |
-     set prod  X,Y x Z    -->
-ab:   XZ, YZ
-    what contains XZ, what contains YZ?
-        aha!   X contains YZ.
-        Y contains XZ.
-    mark X,Y in box, because it contains an elem from the product.
+Now is hard bit: for each *substring,* ab, bc,
+we find what matches it:
+substrings:
+ab --> AB
+bc --> BC
+
+We match `C` for `bc`, 
+and empty set for `ab`
+.
+     ___
+    |   |
+  | 0 | C |
+| A | B | C |
+-------------
+| a | b | c |
 
 
-bb:   Z x Z
-bb:   ZZ
-    what contains ZZ?
-    aha! W contains ZZ.
-    mark W in box.
+Now lets list all our substring of length 3:
+a bc
+ab c   
+>>>>> (note that since it's in Chompsky norm form, there must only be 2 components!!!)
+
+aha, we have a matching for `bc`: it is  `C`.
+And `a` is matched by `A`.
+Is there an `AC` matching?
+!!!! Yes there is!! Z -> AC
+
+.
+     ___
+    | Z |
+  | 0 | C |
+| A | B | C |
+-------------
+| a | b | c |
 
 
-```
-    _____
-  __|   |__
-__|X,Y| W |__
-|X,Y| Z | Z |
-=============
-| a | b | b |
-```
+and we are done.
+wowza, I really messed up my notes previously didnt I
 
-repeat the above step.
 
-| X,Y | W | ==>   XW, YW
-well, K contains XW, so final pattern matched is K.
-
-```
-    _____
-  __| K |__
-__| X | W |__
-|X,Y| Z | Z |
-=============
-| a | b | b |
-```
 
 
 #
