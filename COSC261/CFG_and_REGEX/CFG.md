@@ -50,3 +50,8 @@ https://www.tutorialspoint.com/automata_theory/context_free_grammar_introduction
 https://en.wikipedia.org/wiki/Ambiguous_grammar#Addition_and_subtraction
 
 
+
+### CFG to Pushdown Automata:
+see <CFG_to_PDA.png>
+
+
