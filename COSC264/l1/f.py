@@ -58,11 +58,28 @@ M0_4 = revert('1111' + '0' * (32-4))
 M4_9 = revert('000011111' + '0' * (32-9))
 M9   = revert(("0" * 9) + ("1" * (32-9)))
 
+NON  = revert("0"*32)
+
+
 def decodedate(x):
     day = (x & M4_9) >> (32-9)
     month = (x & M0_4) >> (32-4)
     yr = (x & M9)
 
     return '.'.join(map(str,(day + 1, month + 1, yr)))
+
+
+
+
+def encodedate(day, month, yr):
+    #  <month : 4>  <day : 5>  <yr : 23> 
+    if not(1 <= day <= 31 and 1 <= month <= 12):
+        return -1
+    day -= 1
+    month -= 1
+
+    day <<= (32-9)
+    month <<= (32-4)
+    return day | month | yr
 
 
