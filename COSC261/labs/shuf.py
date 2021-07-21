@@ -15,6 +15,7 @@ def allowed(s,t,st):
             sB = s_i<len(s)
 
     return s_i==(len(s)-1) and t_i==(len(t)-1)
+    
 
 
 
