@@ -16,6 +16,8 @@ typedef struct {
 } array;
 
 
+
+
 array read(int num){
     array ints;
     ints.arr = malloc(num * sizeof(int));
