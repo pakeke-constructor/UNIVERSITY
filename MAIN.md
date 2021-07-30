@@ -3,6 +3,7 @@
 
 Monday
 due 5pm: https://canterbury.qualtrics.com/jfe/form/SV_1Up8GlXamU63d0a
+ENCE quiz: 
 
 Tuesday
 COSC 264 lab
@@ -19,7 +20,7 @@ Thursday
 COSC 265 quiz: https://learn.canterbury.ac.nz/course/view.php?id=11362&section=3
 (due by 10pm)
 *MATH TUTORIAL*:  1 - 3
-*MATH WORKSHOP*  5 - 6 (this week- mobius strips)
+*MATH WORKSHOP*  5 - 6 (this week- modular arith circles)
 
 
 Friday
