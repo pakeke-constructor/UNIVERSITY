@@ -3,7 +3,7 @@
 
 Monday
 due 5pm: https://canterbury.qualtrics.com/jfe/form/SV_1Up8GlXamU63d0a
-ENCE quiz: 
+
 
 Tuesday
 COSC 264 lab
