@@ -20,6 +20,7 @@ Thursday
 COSC 265 quiz: https://learn.canterbury.ac.nz/course/view.php?id=11362&section=3
 (due by 10pm)
 *MATH TUTORIAL*:  1 - 3
+*TEMPORARY THIS WEEK* meet with Phocas, 4-5.
 *MATH WORKSHOP*  5 - 6 (this week- modular arith circles)
 
 
