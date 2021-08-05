@@ -3,24 +3,19 @@
 
 Monday
 due 5pm: https://canterbury.qualtrics.com/jfe/form/SV_1Up8GlXamU63d0a
-
+<temp>{  }
 
 Tuesday
 COSC 264 lab
 ENCE 260 lab   (both on quiz server)
-<temp>{
-
-}
+<temp>{  }
 
 
 Wednesday
 COSC 265 tut 12-2  (paper based, see learn)
 SENG202 lab 4-6 https://quiz2021.csse.canterbury.ac.nz/course/view.php?id=30
 CHECK SENG202 videos (5%)  https://ictg.cosc.canterbury.ac.nz:8007/student
-<temp>{
-    7:30 - 9:00
-    Do extra risk assessment items
-}
+<temp>{  }
 
 
 Thursday
@@ -28,8 +23,10 @@ COSC 265 quiz: https://learn.canterbury.ac.nz/course/view.php?id=11362&section=3
 (due by 10pm)
 *MATH TUTORIAL*:  1 - 3
 *MATH WORKSHOP*  5 - 6 (this week- modular arith circles)
-<temp>{ 
-    meet with Phocas, 4-5.
+<temp>{
+    IF CAN:
+    
+    meet with Phocas, 5:15 start
 }
 
 
