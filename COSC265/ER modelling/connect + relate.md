@@ -43,6 +43,9 @@ Cardinality determines how many entities are involved in a relationship
 There are *1 to 1* relationships, 1 to 2 relationships, 2 to 3, 
 and in general, there are   *N to M*  relationships, where N,M ∈ {N+}
 
+If there are 2 ents in a relationship, it is called a *binary* relationship.
+If there are 3 ents in a relationship, it is called a *ternary* relationship.
+If there are N ents, it is called "N-ary"
 
 
 For example, a relationship relating passengers on a plane to the aeroplane
