@@ -22,18 +22,18 @@ Thursday
 COSC 265 quiz: https://learn.canterbury.ac.nz/course/view.php?id=11362&section=3
 (due by 10pm)
 *MATH TUTORIAL*:  1 - 3
-*MATH WORKSHOP*  5 - 6 (this week- modular arith circles)
+*MATH WORKSHOP*  5 - 6 (this week- menger sponge + limits)
 <temp>{
-    IF CAN:
-    
-    meet with Phocas, 5:15 start
+    Meet Rosie before the workshop (at like 4:30),
+    she wants a quick debrief on workshops
 }
 
 
 Friday
-Team meeting; see slack  3-4
+Team meeting; see slack  2-3
 <temp>{
-    COSC 264 superquiz   12-2
+    Start CV writeup 9:30 - 10:20
+    COSC 264 superquiz   11:15-1:15
 }
 
 
@@ -52,9 +52,6 @@ Sunday
 <temp>{
     Predict when trailer is complete, get steam page up
 }
-
-
-
 
 
 
