@@ -1,23 +1,22 @@
 
-# Connections and relations
 
 <Amazing_article:  https://www.tutorialspoint.com/dbms/er_diagram_representation.htm >
 
 
 
-# RELATIONS
-Relations are represented by a diamond symbol.
+.
              __
             /  \
-           /    \
+      1    /    \    N
 Ent ------| name |======== Ent here too
            \    /
             \  /
              --
 
+Ents can be related with a line and a diamond "relation".
+(see relations.md)
+The lines connecting them are called <Connections>.
 
-
-The lines connecting to the relation are called:
 # CONNECTIONS
 
 

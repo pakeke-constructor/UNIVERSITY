@@ -2,8 +2,13 @@
 ## Weekly tasks
 
 Monday
-due 5pm: https://canterbury.qualtrics.com/jfe/form/SV_1Up8GlXamU63d0a
-<temp>{  }
+due 5pm: https://canterbury.qualtrics.com/jfe/form/SV_1Up8GlXamU63d0a <nvm, (7\8\2021)>
+ENCE tutorial
+<temp>{ 
+    ENCE quiz : MAKE SURE YOU FIND THIS!!
+    COSC265
+}
+
 
 Tuesday
 COSC 264 lab
@@ -15,7 +20,9 @@ Wednesday
 COSC 265 tut 12-2  (paper based, see learn)
 SENG202 lab 4-6 https://quiz2021.csse.canterbury.ac.nz/course/view.php?id=30
 CHECK SENG202 videos (5%)  https://ictg.cosc.canterbury.ac.nz:8007/student
-<temp>{  }
+<temp>{
+
+}
 
 
 Thursday
@@ -39,18 +46,13 @@ Team meeting; see slack  2-3
 
 Saturday
 <temp>{
-    COSC265, finish ER model stuff. also do notes,   10-12
-    Do more notes for ER model for COSC265   
 
-   COSC 265: Start on notes for assignment 1.    4-5
-
-   Start on trailer!!!   (after dinner)
 }
 
 
 Sunday
 <temp>{
-    Predict when trailer is complete, get steam page up
+    
 }
 
 

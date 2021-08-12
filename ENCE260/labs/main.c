@@ -1,29 +1,19 @@
-
-
+//MODIFYING HAS NO EFFECT
+#include <stdint.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdint.h>
-#include <stddef.h>
+#include "temp.h"
 
 
-typedef struct {
-    int32_t x;
-    int32_t y;
-} Vec_t;
 
-
-Vec_t vecSum(Vec_t v1, Vec_t v2)
+int main(void)
 {
-    return (Vec_t){v1.x + v2.x, v1.y + v2.y};
+    Temp_t temp;
+    float value;
+    scanf("%f", &value);
+    temp_set(&temp, value, CELSIUS);
+    temp_print(&temp, CELSIUS);
+    temp_print(&temp, FAHRENHEIT);
+    temp_print(&temp, KELVIN);
 }
-
-
-
-
-int main(){
-
-}
-
-
-
 

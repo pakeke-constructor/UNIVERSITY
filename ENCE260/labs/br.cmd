@@ -1,6 +1,9 @@
 
+@REM build script.
 
-gcc main.c -Werror -Wpedantic -Wextra -Wall -Og
+
+gcc %* -Werror -Wpedantic -Wextra -Wall -Og
+
 a.exe
 
 
