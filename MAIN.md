@@ -26,8 +26,7 @@ CHECK SENG202 videos (5%)  https://ictg.cosc.canterbury.ac.nz:8007/student
 
 
 Thursday
-COSC 265 quiz: https://learn.canterbury.ac.nz/course/view.php?id=11362&section=3
-(due by 10pm)
+
 *MATH TUTORIAL*:  1 - 3
 *MATH WORKSHOP*  5 - 6 (this week- menger sponge + limits)
 <temp>{
@@ -37,10 +36,11 @@ COSC 265 quiz: https://learn.canterbury.ac.nz/course/view.php?id=11362&section=3
 
 
 Friday
+COSC 265 quiz: https://learn.canterbury.ac.nz/course/view.php?id=11362&section=3
+    ( due 10pm )
 Team meeting; see slack  2-3
 <temp>{
-    Start CV writeup 9:30 - 10:20
-    COSC 264 superquiz   11:15-1:15
+
 }
 
 
