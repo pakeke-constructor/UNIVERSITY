@@ -21,22 +21,22 @@ A single attribute that uniquely IDs an entity.
 
 ## derived attribute
 A set of attributes that work together to uniquely ID the entity.
+>        For example: if we have date of birth, AGE is a derived attribute.
     
     ( NOTE:: derived attributes take up no space! They are simply composed
     from other non-key attributes.)
 
-non-key attributes that work together to form a "derived attribute" are
-called **partial key attributes**
 
 # partial key attribute   
-^^^^^ see above
+The key attribute of a weak entity.
+
+(NOTE THAT THIS ISN'T ENOUGH TO IDENTIFY AN ENTITY; you also need
+the identifying relationship too.)
 
 
 
 
 # multivalued attribute
 An array of values
-
-
 
 

@@ -2,18 +2,20 @@
 ## Weekly tasks
 
 Monday
-due 5pm: https://canterbury.qualtrics.com/jfe/form/SV_1Up8GlXamU63d0a <nvm, (7\8\2021)>
+due 6pm: https://canterbury.qualtrics.com/jfe/form/SV_1Up8GlXamU63d0a
 ENCE tutorial
 <temp>{ 
-    ENCE quiz : MAKE SURE YOU FIND THIS!!
-    COSC265
+    ENCE quiz : Every 2nd week : MAKE SURE YOU FIND THIS!!
+    COSC264 assignment
 }
 
 
 Tuesday
 COSC 264 lab
 ENCE 260 lab   (both on quiz server)
-<temp>{  }
+<temp>{
+
+}
 
 
 Wednesday
@@ -40,7 +42,8 @@ COSC 265 quiz: https://learn.canterbury.ac.nz/course/view.php?id=11362&section=3
     ( due 10pm )
 Team meeting; see slack  2-3
 <temp>{
-
+    9am WORKSHOP TAKING PLACE FOR ROSIE!!!! DONT FORGET
+        (this workshop is revision for test)
 }
 
 

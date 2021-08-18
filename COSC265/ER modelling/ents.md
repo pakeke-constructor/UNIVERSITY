@@ -11,7 +11,8 @@ through one or more of it's attributes   (<see key_attr.md>)
 If an entity cannot be uniquely without outside help, then it is a **weak entity**.
 
 Weak ents must have partial key attributes,
-and weak ents must have an "identifying relationship"
+and weak ents must have an "identifying relationship" to a strong ent.
+
 
 
 

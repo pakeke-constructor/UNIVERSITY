@@ -4,6 +4,7 @@
 # packed into one big file.
 
 
+
 Example of a table:
 
   Dog ID  | Dog name  |  Age  |   Breed
@@ -18,5 +19,6 @@ Example of a table:
 Each table must have a Primary Key.
 In this case, Dog ID.
 
+Note that each table is essentially just a big hashtable.
 
 
