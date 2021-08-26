@@ -5,7 +5,9 @@ IP packets are usually most useful to the Internet Service Providers (ISPs).
 
 IPv4 and IPv6 headers hold the *actual IP addresses*.
 
-This means that they are vital for routing the actual packets.
+This means that they are vital for routing the actual packets
+
+
 
 
 ## v6 and v4

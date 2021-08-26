@@ -32,8 +32,7 @@ Thursday
 *MATH TUTORIAL*:  1 - 3
 *MATH WORKSHOP*  5 - 6 (this week- menger sponge + limits)
 <temp>{
-    Meet Rosie before the workshop (at like 4:30),
-    she wants a quick debrief on workshops
+
 }
 
 

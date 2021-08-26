@@ -21,8 +21,10 @@ are generated and everything is nice and clean :)
 
 # sobj. bind( (IP, port) )
 Binds a socket object to an IP and port.
-The host must refer to the local host;
-see *socket.gethostbyname()*.
+To get private computer IP see *socket.gethostbyname()*.
+>> If you only want connections from LAN you'd go with your computer's IP,
+>> but if you want connections from anywhere you'd use 0.0.0.0 or your modem's IP
+
 
 # sobj. listen( max = 10000 )
 Opens `sobj` to incoming connections.

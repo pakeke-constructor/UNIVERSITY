@@ -1,6 +1,7 @@
 
 from bithelper import *
 
+
 MAGIC_NUMBER = 0x497E
 
 TYPE = 1 # type 1 is FileRequest
