@@ -40,10 +40,6 @@ Friday
 COSC 265 quiz: https://learn.canterbury.ac.nz/course/view.php?id=11362&section=3
     ( due 10pm )
 Team meeting; see slack  2-3
-<temp>{
-    9am WORKSHOP TAKING PLACE FOR ROSIE!!!! DONT FORGET
-        (this workshop is revision for test)
-}
 
 
 Saturday

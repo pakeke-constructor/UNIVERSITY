@@ -1,5 +1,6 @@
 
 """
+bithelper.py
 
 This module is used to aid in the process of creating, reading, and
 modifying byte-like objects. (Primarily python bytearrays)
@@ -24,12 +25,7 @@ def push16(bytearr, num):
 
 
 FULLBYTE = 0b1111_1111
-MASK_32 = [
-    24,
-    16,
-    8,
-    0
-]
+MASK_32 = [24, 16, 8, 0]
 
 
 def push32(bytearr, num):
@@ -37,7 +33,6 @@ def push32(bytearr, num):
     for mshift in MASK_32:
         mask = FULLBYTE << mshift
         bytearr.append((num & mask) >> mshift)
-
 
 
 def get16(bytearr, i):

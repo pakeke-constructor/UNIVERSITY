@@ -19,6 +19,8 @@ department_code
 job_title
 
 
+ASSUME that a user can be a teacher and a student at the same time.
+
 
 
 # course
@@ -28,10 +30,6 @@ description
 dates
     start_date
     end_date
-category
-    id
-    name
-    owner (department, college, or unit) *Should this be a relationship instead?*
 
 <course>  ==N=>  taught_by  <=N==  <lecturer>  
     ASSUME: each lecturer teaches at least 1 course.
@@ -40,6 +38,16 @@ category
     +attribute:  mark
     +attribute:  grade  :  (derived from mark)
     ASSUME: each course has at least 1 student.)
+
+
+
+# course_category
+id
+name
+owner
+ASSUME: id is unique within all courses
+
+
 
 # course_section
 section_number  :  KEY within <course>
@@ -76,11 +84,14 @@ text
 ID  :  KEY within user AND within forum
     (NOTE: do one identifying relation, but TWO branches from same diamond.)
 
-<post> ==N=>  made_by_in  <--1-  <user>   :   IDENTIFYING RELATION   
-<post> ==N=>  made_by_in  <--1-  <forum>  :  IDENTIFYING RELATION
+<post> ==N=>  MAKE_POST  <--1-  <user>   :   IDENTIFYING RELATION   
+<post> ==N=>  MAKE_POST  <--1-  <forum>  :  IDENTIFYING RELATION
     NOTE: use same diamond for both of these, maybe
+    (ASSUME: You need to be a registered user to post)
+    (ASSUME: you cannot share posts across forums)
 
-<post> --1->  in_response_to <==1= <post>
+
+<post> --1->  in_response_to <--N- <post>
     ASSUME: it is not possible for a post to respond to itself
     ASSUME: you cannot reply to multiple posts at once.
 
@@ -105,14 +116,16 @@ total_worth
 # assignment extends assessment
 accepted_file_types  :  multivalue
 
-<assignment> ==N=>  submitted_by  <--N- <student>
-    ASSUME: at least one student submits an assignment
+<assignment> --N->  submitted_by  <--N- <student>
+3 way:  <file> (0,N)
     +attributes:
         submission_time
             date
             time_of_day
         mark
         feedback
+ASSUME: It's possible for the same file to be submitted twice, by different
+    students. This would happen if the students try to cheat.
 
 
 
@@ -129,7 +142,34 @@ type
 text
 mark
 penality_regime
-ID   :   KEY within <quiz>
+ID   :   KEY
+question_option   :  MULTIVALUED
+    is_correct
+    option_explanation
+    candidate_answer
+
+    ASSUME: questions IDs are not unique within questions.
+        (it does not state that question IDs are key within questions.)
+    ASSUME: questions can be shared across quizess, (for example, practice lab
+            and real lab share the same question.)
+    ASSUME: each question is in at least one quiz
+
+student <select_options> question
+    Attribute:
+        student_submission
+        is_correct   :  DERIVED (from student_submission and candidate_answer)
+
+ASSUME that sometimes, quizzes and questions will not be submitted by any student.
+
+
+
+
+
+
+
+
+
+
 
 
 

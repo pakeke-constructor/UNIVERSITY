@@ -24,3 +24,12 @@ of more than one of the specialized subclasses.
 
 
 
+#### Total or partial specialization???
+Total specialization means that an entity MUST belong
+to one of it's subclasses
+
+Partial specialization means that an entity does not need
+to be a member of one of it's subclasses.
+
+
+
