@@ -19,6 +19,8 @@ Example of a table:
 Each table must have a Primary Key.
 In this case, Dog ID.
 
-Note that each table is essentially just a big hashtable.
+Note that each table is essentially just a big array.
 
+(So yes, SQL is kinda slow. You would get better performance with
+files and your own data structure.)
 
