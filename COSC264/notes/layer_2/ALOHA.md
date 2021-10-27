@@ -22,35 +22,3 @@ timeslots.
 
 
 
-
-```java
-
-  // The number of DataStore instances
-  static int numInstances = 0;
-
-  // The current DataStore instance
-  static DataStore instance = null;
-
-  /**
-   * This constructor serves only as an error/sanity checking mechanism.
-   * No more than 1 DataStore instance should be constructed.
-   */
-  public DataStore() {
-    numInstances++;
-    if (numInstances > 1) {
-    instance = this;
-  }
-
-  /**
-   * Returns the DataStore instance that is being used by the program.
-   *
-   * @return DataStore the current DataStore instance being used
-   */
-  public static DataStore getDataStore() {
-    return instance;
-  }
-
-
-
-
-```
