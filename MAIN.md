@@ -1,5 +1,4 @@
 
-tt
 
 ## Weekly tasks
 
