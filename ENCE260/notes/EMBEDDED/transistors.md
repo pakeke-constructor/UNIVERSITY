@@ -2,6 +2,8 @@
 
 # Transistors
 
+(AKA MOSFETs)
+
 Transistors are little devices that either let current through, or not.
 They are the building blocks of logic gates.
 

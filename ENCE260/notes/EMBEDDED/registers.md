@@ -25,7 +25,18 @@ Then each register bit controls the pullup resistor:
 
 THE PULLUP RESISTOR NEEDS TO BE CONTROLLED FOR LED MULTIPLEXING!
 
+_PORTx is used for LEDs!_
+If both the row and the coloumn for PORTx is LOW, the LED is ON.
+^^^^^ THIS IS IMPORTANT!!! LOW IS ON!  (due to transistors)
+
+
 
 ## PINx
 Input value.
+
+PINx is read from inside the microcontroller.
+The C program does not output anything to PINx; it just reads.
+
+If PINx is 0, then the switch is closed.
+    ASK MATTHEW ABOUT THIS.
 
