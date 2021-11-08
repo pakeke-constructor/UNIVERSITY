@@ -11,7 +11,15 @@ Each ISP is an AS.
 
 ### What are they?
 - An AS is a set of routers that are managed by a single organization
-- All the internal 
+
+
+
+## intra-AS routing:
+Routing within an Autonomous System
+
+## inter-AS:
+Routing outside or between Autonomous Systems.
+
 
 
 # types ==>

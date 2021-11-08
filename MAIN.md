@@ -34,7 +34,7 @@ CHECK SENG202 videos (5%)  https://ictg.cosc.canterbury.ac.nz:8007/student
 Thursday
 
 *MATH TUTORIAL*:  1 - 3
-*MATH WORKSHOP*  5 - 6 (this week- menger sponge + limits)
+*MATH WORKSHOP*  5 - 6
 <temp>{
 
 }

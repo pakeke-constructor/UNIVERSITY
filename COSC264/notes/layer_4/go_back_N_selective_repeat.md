@@ -1,6 +1,9 @@
 
 
 # Go back N
+### AND
+# Selective repeat
+
 
 we have a window size N.
     (able to send N frames)

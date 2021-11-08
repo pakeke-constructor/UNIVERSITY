@@ -7,12 +7,13 @@ Lets say A wants to connect to B.
 
 A ----> B   SYN     (request to connect)
 
-A <---- B   SYN_ACK   (acknowledgement of SYN.)
-    # If this ios 
+A <---- B   SYN_ACK   (acknowledgement of SYN.) 
 
 A ----> B   ACK      (acknowledgement of SYN-ACK.)
 
+
 ```
+
 
 *How can A be sure that the ACK packet has been recieved?*
 
